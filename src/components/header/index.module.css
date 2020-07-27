@@ -1,0 +1,10 @@
+.navbar {
+  background-color: rgba(31, 66, 180, 0.863);
+  font-size: large;
+  margin-left: auto;
+  text-align: center;
+}
+
+.icon-left {
+  margin-right: 5px;
+}
