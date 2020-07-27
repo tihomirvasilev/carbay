@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 import styles from "./index.module.css";
 
-const Register = () => {
+const Login = () => {
   return (
     <Container>
       <Row>
@@ -18,13 +18,9 @@ const Register = () => {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
-            <Form.Group controlId="repeatPassword">
-              <Form.Label>Repeat Password</Form.Label>
-              <Form.Control type="password" placeholder="Repeat Password" />
-            </Form.Group>
             <div className={styles["button-container"]}>
               <Button className={styles.button} type="submit">
-                Register
+                Login
               </Button>
             </div>
           </Form>
@@ -34,4 +30,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
