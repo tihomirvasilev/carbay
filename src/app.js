@@ -5,13 +5,7 @@ import { Container } from "react-bootstrap";
 import Header from "./components/header";
 
 function App() {
-  return (
-    <Container>
-      <div className={styles.app}>
-        <Header />
-      </div>
-    </Container>
-  );
+  return <Header />;
 }
 
 export default App;
