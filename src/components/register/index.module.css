@@ -1,0 +1,14 @@
+.button {
+  border-color: orangered !important;
+  background-color: orangered !important;
+  color: white !important;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  text-align: center !important;
+}

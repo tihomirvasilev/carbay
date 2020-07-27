@@ -1,11 +1,16 @@
 import React from "react";
 
-import styles from "./app.module.css";
 import { Container } from "react-bootstrap";
 import Header from "./components/header";
+import Register from "./components/register";
 
 function App() {
-  return <Header />;
+  return (
+    <Container fluid>
+      <Header />
+      <Register />
+    </Container>
+  );
 }
 
 export default App;
