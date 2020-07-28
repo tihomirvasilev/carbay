@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Section, Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { BsBookmarksFill, BsChevronExpand, BsSearch } from "react-icons/bs";
 import Menu from "../menu";
 
