@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.brand}>CARBAY</div>
-      <div>© 2020 Copyright: Tihomir Vasilev</div>
+      <div className={styles.author}>© 2020 Copyright: Tihomir Vasilev</div>
     </footer>
   );
 };
