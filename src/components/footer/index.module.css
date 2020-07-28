@@ -1,0 +1,11 @@
+.footer {
+  background-color: rgba(250, 250, 250);
+  display: flex;
+  justify-content: space-between;
+}
+
+.brand {
+  color: orangered !important;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
