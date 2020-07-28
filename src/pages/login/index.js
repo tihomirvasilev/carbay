@@ -1,13 +1,14 @@
 import React from "react";
 
 import Header from "../../components/header";
+import Login from "../../components/login";
 
 const Home = () => {
   return (
     <div>
       <Header />
 
-      <h1>Home Page</h1>
+      <Login />
     </div>
   );
 };
