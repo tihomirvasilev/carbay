@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./app";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Navigation from "./navigation";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Navigation />
   </React.StrictMode>,
   document.getElementById("root")
 );

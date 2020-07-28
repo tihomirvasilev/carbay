@@ -12,7 +12,7 @@ function App() {
     <Container fluid>
       <Header />
       <hr className={styles.hr} />
-      <Register></Register>
+      <Register />
       <hr className={styles.hr} />
       <Login />
     </Container>
