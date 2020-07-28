@@ -8,37 +8,31 @@ import styles from "./index.module.css";
 
 const Header = () => {
   return (
-    <Container fluid className={styles.container}>
+    <header className={styles.container}>
       <Container>
         <Navbar collapseOnSelect expand="lg" className={styles.navbar}>
+          <Navbar.Brand className={styles.brand} href="/">
+            CarBay
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse className="justify-content-between">
+            <Nav.Link href="/favorites" className={styles["nav-item"]}>
+              <BsBookmarksFill className={styles["icon-item"]} />
+              Favorites
+            </Nav.Link>
+            <Nav.Link href="/sort" className={styles["nav-item"]}>
+              <BsChevronExpand className={styles["icon-item"]} />
+              Sort
+            </Nav.Link>
+            <Nav.Link href="/search" className={styles["nav-item"]}>
+              <BsSearch className={styles["icon-item"]} />
+              Search
+            </Nav.Link>
             <Menu />
-            <Nav>
-              <Nav.Link href="/notebook" className={styles["nav-item"]}>
-                <BsBookmarksFill className={styles["icon-item"]} />
-                Notebook
-              </Nav.Link>
-            </Nav>
-            <Navbar.Brand className={styles.brand} href="/">
-              CarBay
-            </Navbar.Brand>
-            <Nav>
-              <Nav.Link href="/sort" className={styles["nav-item"]}>
-                <BsChevronExpand className={styles["icon-item"]} />
-                Sort
-              </Nav.Link>
-            </Nav>
-            <Nav>
-              <Nav.Link href="/search" className={styles["nav-item"]}>
-                <BsSearch className={styles["icon-item"]} />
-                Search
-              </Nav.Link>
-            </Nav>
           </Navbar.Collapse>
         </Navbar>
       </Container>
-    </Container>
+    </header>
   );
 };
 
