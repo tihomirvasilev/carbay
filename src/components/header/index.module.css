@@ -1,5 +1,6 @@
-.container {
+.header {
   background-color: rgba(250, 250, 250);
+  margin-bottom: 2em;
 }
 
 .navbar {

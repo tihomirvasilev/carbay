@@ -1,16 +1,12 @@
 import React from "react";
 
-import Header from "../../components/header";
-import Footer from "../../components/footer";
+import Layout from "../../components/layout";
 
 const HomePage = () => {
   return (
-    <div>
-      <Header />
-
-      <h1>Home Page</h1>
-      <Footer />
-    </div>
+    <Layout>
+      <h1>HOME PAGE</h1>
+    </Layout>
   );
 };
 
