@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Tab, Tabs } from "react-bootstrap";
+
 import styles from "./index.module.css";
 
 const Dashboard = (props) => {
