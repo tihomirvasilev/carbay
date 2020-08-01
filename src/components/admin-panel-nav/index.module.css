@@ -1,0 +1,15 @@
+.header {
+  background-color: rgba(250, 250, 250);
+  margin-bottom: 2em;
+}
+
+.color-orangered {
+  color: orangered;
+}
+.nav-color {
+  background-color: orange !important;
+}
+.color-nav-item :hover {
+  background-color: orangered;
+  color: white;
+}

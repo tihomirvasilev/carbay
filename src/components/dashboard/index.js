@@ -13,13 +13,17 @@ const Dashboard = (props) => {
       activeKey={key}
       onSelect={(k) => setKey(k)}
     >
-      <Tab eventKey="1" title="New Ad" tabClassName={styles["orangered"]}>
+      <Tab eventKey="1" title="New Ad" tabClassName={styles["color-orangered"]}>
         <h1>New Ad</h1>
       </Tab>
-      <Tab eventKey="2" title="My Ads" tabClassName={styles["orangered"]}>
+      <Tab eventKey="2" title="My Ads" tabClassName={styles["color-orangered"]}>
         <h1>My Ads</h1>
       </Tab>
-      <Tab eventKey="3" title="Favorites" tabClassName={styles["orangered"]}>
+      <Tab
+        eventKey="3"
+        title="Favorites"
+        tabClassName={styles["color-orangered"]}
+      >
         <h1>favorites</h1>
       </Tab>
     </Tabs>

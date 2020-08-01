@@ -6,6 +6,7 @@ import {
   BsChevronExpand,
   BsSearch,
   BsBookmarkCheck,
+  BsWrench,
 } from "react-icons/bs";
 import Menu from "../menu";
 
@@ -36,6 +37,10 @@ const Header = () => {
             <Nav.Link href="/search" className={styles["nav-item"]}>
               <BsSearch className={styles["icon-item"]} />
               Search
+            </Nav.Link>
+            <Nav.Link href="/admin-panel" className={styles["nav-item"]}>
+              <BsWrench className={styles["icon-item"]} />
+              Admin Panel
             </Nav.Link>
             <Nav>
               <Menu />
