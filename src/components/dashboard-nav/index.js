@@ -1,21 +1,18 @@
 import React from "react";
 
-import { Container, Nav, Navbar } from "react-bootstrap";
-import { BsFillCaretLeftFill } from "react-icons/bs";
+import { Container, Navbar } from "react-bootstrap";
+import BackButton from "../back-button";
 
 import styles from "./index.module.css";
 
-const DashboardHeader = () => {
+const DashboardNav = () => {
   return (
     <header className={styles.header}>
       <Container>
         <Navbar collapseOnSelect expand="lg" className={styles.navbar}>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse className="justify-content-between">
-            <Nav.Link href="/" className={styles["nav-item"]}>
-              <BsFillCaretLeftFill className={styles["icon-item"]} />
-              Back
-            </Nav.Link>
+            <BackButton />
             <Navbar.Brand className={styles.brand} href="/">
               CarBay
             </Navbar.Brand>
@@ -26,4 +23,4 @@ const DashboardHeader = () => {
   );
 };
 
-export default DashboardHeader;
+export default DashboardNav;
