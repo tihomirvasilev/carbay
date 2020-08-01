@@ -17,9 +17,6 @@ const DashboardHeader = () => {
               Back
             </Nav.Link>
             <Navbar.Brand className={styles.brand} href="/">
-              Dashboard
-            </Navbar.Brand>
-            <Navbar.Brand className={styles.brand} href="/">
               CarBay
             </Navbar.Brand>
           </Navbar.Collapse>
