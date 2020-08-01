@@ -8,13 +8,13 @@ import styles from "./index.module.css";
 
 const Layout = (props) => {
   return (
-    <Container fluid className={styles.container}>
+    <>
+      <DashboardNav />
       <Container>
-        <DashboardNav />
         <div>{props.children}</div>
-        <Footer />
       </Container>
-    </Container>
+      <Footer />
+    </>
   );
 };
 

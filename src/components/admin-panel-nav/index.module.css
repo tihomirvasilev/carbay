@@ -6,7 +6,8 @@
 .color-orangered {
   color: orangered;
 }
-.nav-color {
+
+.color-nav-item .color-orangered.active {
   background-color: orange !important;
 }
 .color-nav-item :hover {

@@ -14,7 +14,7 @@ import styles from "./index.module.css";
 
 const Header = () => {
   return (
-    <header className={styles.header}>
+    <Container fluid className={styles.header}>
       <Container>
         <Navbar collapseOnSelect expand="lg" className={styles.navbar}>
           <Navbar.Brand className={styles.brand} href="/">
@@ -48,7 +48,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Navbar>
       </Container>
-    </header>
+    </Container>
   );
 };
 

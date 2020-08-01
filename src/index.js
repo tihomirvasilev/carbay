@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Navigation from "./navigation";
 import AuthProvider from "./utils/auth-provider";
 import { BrowserRouter } from "react-router-dom";
+
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <BrowserRouter>

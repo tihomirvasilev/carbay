@@ -20,41 +20,39 @@ const SignIn = () => {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col md={{ span: 4, offset: 4 }}>
-          <Form className={styles.form} onSubmit={handleSubmit}>
-            <Form.Group controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                onChange={handleChange}
-                name="email"
-                type="email"
-                placeholder="Enter email"
-              />
-            </Form.Group>
-            <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                onChange={handleChange}
-                name="password"
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Group>
-            <div className={styles["button-container"]}>
-              <Button className={styles.button} type="submit">
-                Login
-              </Button>
-              {errors.length > 0
-                ? errors.map((error) => <p style={{ color: "red" }}>{error}</p>)
-                : null}
-            </div>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <Row>
+      <Col md={{ span: 4, offset: 4 }}>
+        <Form className={styles.form} onSubmit={handleSubmit}>
+          <Form.Group controlId="email">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              onChange={handleChange}
+              name="email"
+              type="email"
+              placeholder="Enter email"
+            />
+          </Form.Group>
+          <Form.Group controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              onChange={handleChange}
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Group>
+          <div className={styles["button-container"]}>
+            <Button className={styles.button} type="submit">
+              Login
+            </Button>
+            {errors.length > 0
+              ? errors.map((error) => <p style={{ color: "red" }}>{error}</p>)
+              : null}
+          </div>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 
-export default SignIn;
+export default withRouter(SignIn);

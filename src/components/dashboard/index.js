@@ -12,6 +12,7 @@ const Dashboard = (props) => {
       id="controlled-tab-example"
       activeKey={key}
       onSelect={(k) => setKey(k)}
+      defaultActiveKey={key}
     >
       <Tab eventKey="1" title="New Ad" tabClassName={styles["color-orangered"]}>
         <h1>New Ad</h1>
