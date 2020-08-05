@@ -1,19 +1,19 @@
 import React, { useContext } from "react";
-import { firebaseAuth } from "../../utils/auth-provider";
 import { withRouter } from "react-router-dom";
 
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { firebaseContext } from "../../firebase/auth-provider";
 
 import styles from "./index.module.css";
 
-const SignUp = (props) => {
-  const { handleSignUp, inputs, setInputs, errors } = useContext(firebaseAuth);
+const Register = (props) => {
+  const { handleRegister, inputs, setInputs, errors } = useContext(
+    firebaseContext
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //wait to sign up
-    await handleSignUp();
-    //push home
+    await handleRegister();
     props.history.push("/");
   };
 
@@ -27,7 +27,27 @@ const SignUp = (props) => {
       <Row>
         <Col md={{ span: 4, offset: 4 }}>
           <Form className={styles.form} onSubmit={handleSubmit}>
-            <Form.Group controlId="email">
+            <Form.Group>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                onChange={handleChange}
+                name="name"
+                type="text"
+                placeholder="Your name"
+                value={inputs.name}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Phone</Form.Label>
+              <Form.Control
+                onChange={handleChange}
+                name="phone"
+                type="text"
+                placeholder="Your phone"
+                value={inputs.phone}
+              />
+            </Form.Group>
+            <Form.Group>
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 onChange={handleChange}
@@ -37,7 +57,7 @@ const SignUp = (props) => {
                 value={inputs.email}
               />
             </Form.Group>
-            <Form.Group controlId="password">
+            <Form.Group>
               <Form.Label>Password</Form.Label>
               <Form.Control
                 onChange={handleChange}
@@ -47,14 +67,14 @@ const SignUp = (props) => {
                 value={inputs.password}
               />
             </Form.Group>
-            <Form.Group controlId="repeatPassword">
+            <Form.Group>
               <Form.Label>Repeat Password</Form.Label>
               <Form.Control
                 onChange={handleChange}
                 name="rePassword"
                 type="password"
                 placeholder="Repeat Password"
-                value={inputs.password}
+                value={inputs.rePassword}
               />
             </Form.Group>
             <div className={styles["button-container"]}>
@@ -62,9 +82,6 @@ const SignUp = (props) => {
                 Register
               </Button>
             </div>
-            {errors.length > 0
-              ? errors.map((error) => <p style={{ color: "red" }}>{error}</p>)
-              : null}
           </Form>
         </Col>
       </Row>
@@ -72,4 +89,4 @@ const SignUp = (props) => {
   );
 };
 
-export default withRouter(SignUp);
+export default withRouter(Register);

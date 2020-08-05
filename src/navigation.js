@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import HomePage from "./pages/home";
@@ -7,12 +7,7 @@ import RegisterPage from "./pages/register";
 import DashboardPage from "./pages/dashboard";
 import AdminPanelPage from "./pages/admin-panel";
 
-import { firebaseAuth } from "./utils/auth-provider";
-
 const Navigation = () => {
-  const { token } = useContext(firebaseAuth);
-  console.log(token);
-
   return (
     <BrowserRouter>
       <Switch>
