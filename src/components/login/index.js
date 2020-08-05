@@ -1,21 +1,22 @@
 import React, { useContext } from "react";
-
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { firebaseAuth } from "../../utils/auth-provider";
 import { withRouter } from "react-router-dom";
+import { firebaseContext } from "../../firebase/auth-provider";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import styles from "./index.module.css";
 
-const SignIn = () => {
-  const { handleSignIn, inputs, setInputs, errors } = useContext(firebaseAuth);
+const Login = (props) => {
+  const { handleLogin, inputs, setInputs, errors } = useContext(
+    firebaseContext
+  );
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("handleSubmit");
-    handleSignIn();
+    await handleLogin();
+    props.history.push("/");
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(inputs);
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -30,6 +31,7 @@ const SignIn = () => {
               name="email"
               type="email"
               placeholder="Enter email"
+              value={inputs.email}
             />
           </Form.Group>
           <Form.Group controlId="password">
@@ -39,15 +41,13 @@ const SignIn = () => {
               name="password"
               type="password"
               placeholder="Password"
+              value={inputs.password}
             />
           </Form.Group>
           <div className={styles["button-container"]}>
             <Button className={styles.button} type="submit">
               Login
             </Button>
-            {errors.length > 0
-              ? errors.map((error) => <p style={{ color: "red" }}>{error}</p>)
-              : null}
           </div>
         </Form>
       </Col>
@@ -55,4 +55,4 @@ const SignIn = () => {
   );
 };
 
-export default withRouter(SignIn);
+export default withRouter(Login);

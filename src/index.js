@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Navigation from "./navigation";
-import AuthProvider from "./utils/auth-provider";
+import AuthProvider from "./firebase/auth-provider";
+
 import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
