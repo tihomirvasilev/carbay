@@ -3,12 +3,9 @@ import React, { useContext } from "react";
 import { Nav, NavDropdown } from "react-bootstrap";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 
-import { firebaseAuth } from "../../utils/auth-provider";
 import styles from "./index.module.css";
 
 const Menu = () => {
-  const { handleSignOut } = useContext(firebaseAuth);
-
   return (
     <Nav>
       <NavDropdown
@@ -24,7 +21,7 @@ const Menu = () => {
         <NavDropdown.Divider />
         <NavDropdown.Item href="/profile">Settings</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item onClick={handleSignOut} href="/">
+        <NavDropdown.Item onClick={null} href="/">
           Logout
         </NavDropdown.Item>
       </NavDropdown>
