@@ -11,7 +11,7 @@ class Firebase {
     this.db = app.firestore();
   }
 
-  register(name, phone, email, password, setToken, setErrors) {
+  register(name, phone, email, password, setToken) {
     this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(async (res) => {
@@ -22,41 +22,24 @@ class Firebase {
         });
 
         const token = await Object.entries(res.user)[5][1].b;
-        await localStorage.setItem("auth-token", token);
+        localStorage.setItem("auth-token", token);
         setToken(token);
-      })
-      .catch((err) => {
-        setErrors((prev) => [...prev, err.message]);
       });
   }
 
-  login(email, password, setErrors, setToken) {
-    this.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(async (res) => {
-        const token = await Object.entries(res.user)[5][1].b;
-        await localStorage.setItem("token", token);
+  login(email, password, setToken) {
+    this.auth.signInWithEmailAndPassword(email, password).then(async (res) => {
+      const token = await Object.entries(res.user)[5][1].b;
+      await localStorage.setItem("auth-token", token);
 
-        setToken(window.localStorage.token);
-      })
-      .catch((err) => {
-        setErrors((prev) => [...prev, err.message]);
-      });
+      setToken(window.localStorage.token);
+    });
   }
 
-  logout(setErrors, setToken) {
-    this.auth
-      .signOut()
-      .then((res) => {
-        localStorage.removeItem("token");
-        setToken(null);
-      })
-      .catch((err) => {
-        setErrors((prev) => [...prev, err.message]);
-        localStorage.removeItem("token");
-        setToken(null);
-        console.error(err.message);
-      });
+  logout() {
+    this.auth.signOut().then(async (res) => {
+      await localStorage.removeItem("auth-token");
+    });
   }
 
   async resetPassword(email) {

@@ -1,25 +1,36 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
-import { firebaseContext } from "../../firebase/auth-provider";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import FormValidation from "../../utils/from-validation";
+import firebase from "../../firebase";
+import validateLogin from "./validation";
 import styles from "./index.module.css";
 
+const INITIAL_STATE = {
+  email: "",
+  password: "",
+};
 const Login = (props) => {
-  const { handleLogin, inputs, setInputs, errors } = useContext(
-    firebaseContext
-  );
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    errors,
+  } = FormValidation(INITIAL_STATE, validateLogin, handleLogin);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await handleLogin();
-    props.history.push("/");
-  };
+  const [token, setToken] = React.useState(null);
+  const [firebaseError, setFirebaseError] = React.useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputs((prev) => ({ ...prev, [name]: value }));
-  };
-
+  function handleLogin() {
+    const { email, password } = values;
+    try {
+      firebase.login(email, password, setToken);
+      props.history.push("/");
+    } catch (err) {
+      console.error("Authentication Error", err);
+      setFirebaseError(err.message);
+    }
+  }
   return (
     <Row>
       <Col md={{ span: 4, offset: 4 }}>
@@ -31,7 +42,7 @@ const Login = (props) => {
               name="email"
               type="email"
               placeholder="Enter email"
-              value={inputs.email}
+              value={values.email}
             />
           </Form.Group>
           <Form.Group controlId="password">
@@ -41,7 +52,7 @@ const Login = (props) => {
               name="password"
               type="password"
               placeholder="Password"
-              value={inputs.password}
+              value={values.password}
             />
           </Form.Group>
           <div className={styles["button-container"]}>

@@ -1,26 +1,42 @@
 import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
-
+import FormValidation from "../../utils/from-validation";
+import validateRegister from "./validation";
+import firebase from "../../firebase";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { firebaseContext } from "../../firebase/auth-provider";
 
 import styles from "./index.module.css";
 
+const INITIAL_STATE = {
+  name: "",
+  phone: "",
+  email: "",
+  password: "",
+  rePassword: "",
+};
+
 const Register = (props) => {
-  const { handleRegister, inputs, setInputs, errors } = useContext(
-    firebaseContext
-  );
+  const {
+    handleSubmit,
+    handleBlur,
+    handleChange,
+    values,
+    errors,
+  } = FormValidation(INITIAL_STATE, validateRegister, handleRegister);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await handleRegister();
-    props.history.push("/");
-  };
+  const [token, setToken] = React.useState(null);
+  const [firebaseError, setFirebaseError] = React.useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputs((prev) => ({ ...prev, [name]: value }));
-  };
+  function handleRegister() {
+    const { name, phone, email, password } = values;
+    try {
+      firebase.register(name, phone, email, password, setToken);
+      props.history.push("/");
+    } catch (err) {
+      console.error("Authentication Error", err);
+      setFirebaseError(err.message);
+    }
+  }
 
   return (
     <Container>
@@ -34,7 +50,7 @@ const Register = (props) => {
                 name="name"
                 type="text"
                 placeholder="Your name"
-                value={inputs.name}
+                value={values.name}
               />
             </Form.Group>
             <Form.Group>
@@ -44,28 +60,38 @@ const Register = (props) => {
                 name="phone"
                 type="text"
                 placeholder="Your phone"
-                value={inputs.phone}
+                value={values.phone}
               />
             </Form.Group>
             <Form.Group>
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
                 name="email"
                 type="email"
+                className={errors.email && "error-input"}
                 placeholder="Enter email"
-                value={inputs.email}
+                autoComplete="off"
               />
+              {errors.email && <p className="error-text">{errors.email}</p>}
             </Form.Group>
             <Form.Group>
               <Form.Label>Password</Form.Label>
               <Form.Control
                 onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                className={errors.password && "error-input"}
                 name="password"
                 type="password"
                 placeholder="Password"
-                value={inputs.password}
               />
+              {errors.password && (
+                <p className="error-text">{errors.password}</p>
+              )}
+              {firebaseError && <p className="error-text">{firebaseError}</p>}
             </Form.Group>
             <Form.Group>
               <Form.Label>Repeat Password</Form.Label>
@@ -74,7 +100,7 @@ const Register = (props) => {
                 name="rePassword"
                 type="password"
                 placeholder="Repeat Password"
-                value={inputs.rePassword}
+                value={values.rePassword}
               />
             </Form.Group>
             <div className={styles["button-container"]}>
