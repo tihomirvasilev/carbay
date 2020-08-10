@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import FormValidation from "../../utils/from-validation";
 import validateRegister from "./validation";
-import firebase from "../../firebase";
+import { FirebaseContext } from "../../firebase";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 import styles from "./index.module.css";
@@ -16,6 +16,7 @@ const INITIAL_STATE = {
 };
 
 const Register = (props) => {
+  const { firebase } = useContext(FirebaseContext);
   const {
     handleSubmit,
     handleBlur,
@@ -24,13 +25,12 @@ const Register = (props) => {
     errors,
   } = FormValidation(INITIAL_STATE, validateRegister, handleRegister);
 
-  const [token, setToken] = React.useState(null);
   const [firebaseError, setFirebaseError] = React.useState(null);
 
   function handleRegister() {
     const { name, phone, email, password } = values;
     try {
-      firebase.register(name, phone, email, password, setToken);
+      firebase.register(name, phone, email, password);
       props.history.push("/");
     } catch (err) {
       console.error("Authentication Error", err);

@@ -1,11 +1,10 @@
 import React from "react";
-import ModelForm from "../../components/model-form";
-import ModelsList from "../../components/models-list";
-
 import { Container, Row, Col } from "react-bootstrap";
+
 import AdminPanelNav from "../../components/admin-nav";
-import Title from "../../components/title";
 import Layout from "../../components/layout";
+import ModelForm from "../../components/model-form";
+import Title from "../../components/title";
 
 const ModelsAdmin = (params) => {
   return (

@@ -8,7 +8,7 @@ const ModelsList = (props) => {
 
   useEffect(() => {
     getModels();
-  }, []);
+  });
 
   function getModels() {
     if (props.brandId === "") {
@@ -23,7 +23,7 @@ const ModelsList = (props) => {
       });
 
     setModels(modelsDb);
-    console.log(modelsDb);
+    console.log(models);
   }
 
   return (

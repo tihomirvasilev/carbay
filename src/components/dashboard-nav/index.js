@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Container, Navbar } from "react-bootstrap";
-import Title from "../title";
 import styles from "./index.module.css";
 
 const DashboardNav = () => {

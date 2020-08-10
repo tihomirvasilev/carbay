@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 const ModelAdd = () => {
   const { firebase } = useContext(FirebaseContext);
 
-  const { handleSubmit, handleChange, values, errors } = FormValidation(
+  const { handleSubmit, handleChange, values } = FormValidation(
     INITIAL_STATE,
     ValidateModel,
     handleAddModel
@@ -25,7 +25,7 @@ const ModelAdd = () => {
 
   useEffect(() => {
     getBrandsList();
-  }, []);
+  });
 
   function getBrandsList() {
     return firebase.db.collection("brands").onSnapshot(handleSnapshot);

@@ -1,12 +1,6 @@
 import React from "react";
 
 import { Tab, Row, Col, Nav, Container } from "react-bootstrap";
-import BrandForm from "../brand-form";
-import BrandsList from "../brands-list";
-import ModelForm from "../model-form";
-import ModelList from "../models-list";
-import OptionForm from "../option-form";
-import OptionsList from "../options-list";
 
 import styles from "./index.module.css";
 

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import FirebaseContext from "../../firebase/context";
 
 const BrandsList = () => {
-  const { firebase } = React.useContext(FirebaseContext);
+  const { firebase } = useContext(FirebaseContext);
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
     getBrands();
-  }, []);
+  });
 
   function getBrands() {
     return firebase.db

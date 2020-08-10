@@ -11,7 +11,7 @@ class Firebase {
     this.db = app.firestore();
   }
 
-  register(name, phone, email, password, setToken) {
+  register(name, phone, email, password) {
     this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(async (res) => {
@@ -26,16 +26,13 @@ class Firebase {
 
         const token = await Object.entries(res.user)[5][1].b;
         localStorage.setItem("auth-token", token);
-        setToken(token);
       });
   }
 
-  login(email, password, setToken) {
+  login(email, password) {
     this.auth.signInWithEmailAndPassword(email, password).then(async (res) => {
       const token = await Object.entries(res.user)[5][1].b;
-      await localStorage.setItem("auth-token", token);
-
-      setToken(window.localStorage.token);
+      localStorage.setItem("auth-token", token);
     });
   }
 

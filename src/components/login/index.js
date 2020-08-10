@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import FormValidation from "../../utils/from-validation";
-import firebase from "../../firebase";
+import { FirebaseContext } from "../../firebase";
 import validateLogin from "./validation";
 import styles from "./index.module.css";
 
@@ -11,26 +11,26 @@ const INITIAL_STATE = {
   password: "",
 };
 const Login = (props) => {
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    errors,
-  } = FormValidation(INITIAL_STATE, validateLogin, handleLogin);
+  const { firebase } = useContext(FirebaseContext);
+  const { handleSubmit, handleChange, values } = FormValidation(
+    INITIAL_STATE,
+    validateLogin,
+    handleLogin
+  );
 
-  const [token, setToken] = React.useState(null);
-  const [firebaseError, setFirebaseError] = React.useState(null);
+  const [firebaseError, setFirebaseError] = useState(null);
 
   function handleLogin() {
     const { email, password } = values;
     try {
-      firebase.login(email, password, setToken);
+      firebase.login(email, password);
       props.history.push("/");
     } catch (err) {
       console.error("Authentication Error", err);
       setFirebaseError(err.message);
     }
   }
+
   return (
     <Row>
       <Col md={{ span: 4, offset: 4 }}>

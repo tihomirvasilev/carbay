@@ -6,12 +6,18 @@
 .nav-link {
   color: orangered;
 }
-
+.nav-link :active {
+  background-color: orangered !important;
+  color: white;
+}
 .nav-item :hover {
   background-color: orangered;
   color: white;
 }
-
+.nav-item :active {
+  background-color: orangered !important;
+  color: white;
+}
 .title {
   text-align: center;
   color: orangered;
