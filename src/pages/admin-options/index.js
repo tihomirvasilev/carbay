@@ -1,13 +1,13 @@
 import React from "react";
-import BrandForm from "../../components/brand-form";
-import BrandsList from "../../components/brands-list";
-
 import { Container, Row, Col } from "react-bootstrap";
-import AdminPanelNav from "../../components/admin-nav";
-import Title from "../../components/title";
-import Layout from "../../components/layout";
 
-const BrandsAdmin = () => {
+import AdminPanelNav from "../../components/admin-nav";
+import Layout from "../../components/layout";
+import OptionForm from "../../components/option-form";
+import OptionsList from "../../components/options-list";
+import Title from "../../components/title";
+
+const ModelsAdmin = () => {
   return (
     <Layout>
       <Container>
@@ -16,9 +16,9 @@ const BrandsAdmin = () => {
           <Row>
             <Col sm={2} />
             <Col sm={5}>
-              <BrandForm />
+              <OptionForm />
               <br />
-              <BrandsList />
+              <OptionsList />
             </Col>
           </Row>
         </AdminPanelNav>
@@ -27,4 +27,4 @@ const BrandsAdmin = () => {
   );
 };
 
-export default BrandsAdmin;
+export default ModelsAdmin;
