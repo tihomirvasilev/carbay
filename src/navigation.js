@@ -6,11 +6,12 @@ import useAuth from "./utils/auth";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
-import DashboardPage from "./pages/dashboard";
+import MyAdsPage from "./pages/my-ads";
 import AdminPage from "./pages/admin";
 import BrandsAdminPage from "./pages/admin-brands";
 import ModelsAdminPage from "./pages/admin-models";
 import OptionsAdminPage from "./pages/admin-options";
+import NewAd from "./pages/new-ad";
 
 const Navigation = () => {
   const user = useAuth();
@@ -22,7 +23,8 @@ const Navigation = () => {
           <Route path="/" exact component={HomePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/register" component={RegisterPage} />
-          <Route path="/dashboard" component={DashboardPage} />
+          <Route path="/my-ads" component={MyAdsPage} />
+          <Route path="/new-ad" component={NewAd} />
           <Route path="/admin" exact component={AdminPage} />
           <Route path="/admin/brands" component={BrandsAdminPage} />
           <Route path="/admin/models" component={ModelsAdminPage} />
