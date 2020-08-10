@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FirebaseContext from "../../firebase/context";
 
-const BrandsList = (props) => {
+const BrandsList = () => {
   const { firebase } = React.useContext(FirebaseContext);
   const [brands, setBrands] = useState([]);
 
@@ -10,7 +10,10 @@ const BrandsList = (props) => {
   }, []);
 
   function getBrands() {
-    return firebase.db.collection("brands").onSnapshot(handleSnapshot);
+    return firebase.db
+      .collection("brands")
+      .orderBy("name")
+      .onSnapshot(handleSnapshot);
   }
 
   async function handleSnapshot(snapshot) {
@@ -21,13 +24,11 @@ const BrandsList = (props) => {
   }
 
   return (
-    <div>
+    <ul>
       {brands.map((b, id) => (
-        <h4 key={b.id}>
-          {id}.{b.name}
-        </h4>
+        <li key={b.id}>{b.name}</li>
       ))}
-    </div>
+    </ul>
   );
 };
 

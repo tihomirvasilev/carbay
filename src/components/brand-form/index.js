@@ -18,10 +18,11 @@ const Brands = (props) => {
   );
 
   function handleCreateBrand() {
+    const hasErrors = Object.keys(errors).length > 0;
     if (!user) {
       props.history.push("/login");
     } else {
-      if (!errors) {
+      if (!hasErrors) {
         const { name } = values;
         const newBrand = {
           name,
@@ -33,7 +34,7 @@ const Brands = (props) => {
           models: [],
         };
         firebase.db.collection("brands").add(newBrand);
-        props.history.push("/admin-panel");
+        props.history.push("/admin/brands");
       }
     }
   }

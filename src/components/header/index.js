@@ -38,7 +38,7 @@ const Header = () => {
               <BsSearch className={styles["icon-item"]} />
               Search
             </Nav.Link>
-            <Nav.Link href="/admin-panel" className={styles["nav-item"]}>
+            <Nav.Link href="/admin" className={styles["nav-item"]}>
               <BsWrench className={styles["icon-item"]} />
               Admin Panel
             </Nav.Link>
