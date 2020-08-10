@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 
-const ModelsList = () => {
+import { FirebaseContext } from "../../firebase";
+
+const ModelsList = (props) => {
+  const { firebase } = useContext(FirebaseContext);
+  const [models, setModels] = useState(null);
+
+  useEffect(() => {
+    getModels();
+  }, []);
+
+  function getModels() {
+    if (props.brandId === "") {
+      return;
+    }
+    const modelsDb = firebase.db
+      .collection("brands")
+      .doc(props.brandId)
+      .get()
+      .then((res) => {
+        console.log(res.data().models);
+      });
+
+    setModels(modelsDb);
+    console.log(modelsDb);
+  }
+
   return (
     <div>
       <h4>model 1</h4>

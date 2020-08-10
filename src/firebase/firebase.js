@@ -15,10 +15,13 @@ class Firebase {
     this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(async (res) => {
+        res.user.updateProfile({
+          displayName: name,
+        });
+
         this.db.collection("users").add({
           uid: res.user.uid,
-          name: name,
-          phone: phone,
+          phoneNumber: phone,
         });
 
         const token = await Object.entries(res.user)[5][1].b;
