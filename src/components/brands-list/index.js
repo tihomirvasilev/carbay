@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import FirebaseContext from "../../firebase/context";
+import { FirebaseContext } from "../../firebase";
 
 const BrandsList = () => {
   const { firebase } = useContext(FirebaseContext);

@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   name: "",
 };
 
-const ModelAdd = () => {
+const ModelForm = () => {
   const { firebase } = useContext(FirebaseContext);
 
   const { handleSubmit, handleChange, values } = FormValidation(
@@ -35,7 +35,6 @@ const ModelAdd = () => {
     const brands = await snapshot.docs.map((doc) => {
       return { id: doc.id, ...doc.data() };
     });
-    console.log(brands);
     setBrands(brands);
   }
 
@@ -145,4 +144,4 @@ const ModelAdd = () => {
   );
 };
 
-export default ModelAdd;
+export default ModelForm;
