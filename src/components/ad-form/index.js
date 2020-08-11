@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { Form, Col, Button } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
-import FormValidation from "../../utils/from-validation";
 
+import FormValidation from "../../utils/from-validation";
 import validateAd from "./validateAd";
+import styles from "./index.module.css";
 
 const INITIAL_STATE = {
   brand: "",
@@ -19,36 +21,51 @@ const INITIAL_STATE = {
   description: "",
   city: "",
   address: "",
+  imageUrls: [],
+  image: "",
 };
 
-const AdForm = () => {
+const AdForm = (props) => {
   const { firebase, user } = useContext(FirebaseContext);
   const { handleSubmit, handleChange, values, errors } = FormValidation(
     INITIAL_STATE,
     validateAd,
     createAd
   );
-
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
   const [years, setYears] = useState([]);
+  const [pictureFile, setPictureFile] = useState([]);
+  const [pictures, setPictures] = useState([]);
 
   useEffect(() => {
-    generateYearsTillNow();
-    getBrands();
-  }, []);
-
-  function generateYearsTillNow() {
-    let date = new Date();
-    const lastYear = date.getFullYear();
-
-    let years = [];
-    for (let i = 1930; i <= lastYear; i++) {
-      years.push(i);
+    async function getBrands() {
+      const brands = [];
+      await firebase.db
+        .collection("brands")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.docs.forEach((doc) => {
+            brands.push(doc.data());
+          });
+        })
+        .catch((e) => console.log(e));
+      setBrands(brands);
     }
 
-    setYears(years);
-  }
+    function generateYearsTillNow() {
+      let years = [];
+      let date = new Date();
+      const lastYear = date.getFullYear();
+
+      for (let i = 1950; i <= lastYear; i++) {
+        years.push(i);
+      }
+      setYears(years);
+    }
+    generateYearsTillNow();
+    getBrands();
+  }, [firebase]);
 
   function handleBrandChange(e) {
     const currentBrand = JSON.parse(e.target.value);
@@ -56,8 +73,28 @@ const AdForm = () => {
     handleChange(e);
   }
 
-  function createAd() {
-    console.log(values);
+  async function handleImageAsFile(e) {
+    e.persist();
+    const imageUrls = pictures;
+    console.log(user.uid);
+    const file = e.target.files[0];
+    const metadata = {
+      contentType: "image/jpeg",
+    };
+
+    const uploadTask = await firebase.storage
+      .ref(`/ads/${user.uid}-${file.name}`)
+      .put(file, metadata);
+
+    await uploadTask.ref.getDownloadURL().then(function (downloadURL) {
+      imageUrls.push(downloadURL);
+    });
+
+    setPictures(imageUrls);
+    setPictureFile(file);
+  }
+
+  async function createAd() {
     const newAd = {
       brand: JSON.parse(values.brand).name,
       model: values.model,
@@ -72,23 +109,11 @@ const AdForm = () => {
       description: values.description,
       city: values.city,
       address: values.address,
+      imageUrls: pictures,
     };
-
-    firebase.db.collection("ads").add(newAd);
-  }
-
-  function getBrands() {
-    return firebase.db
-      .collection("brands")
-      .orderBy("name")
-      .onSnapshot(handleSnapshot);
-  }
-
-  async function handleSnapshot(snapshot) {
-    const brands = await snapshot.docs.map((doc) => {
-      return { id: doc.id, ...doc.data() };
-    });
-    setBrands(brands);
+    console.log(newAd);
+    await firebase.db.collection("ads").add(newAd);
+    props.history.push("/");
   }
 
   return (
@@ -97,11 +122,11 @@ const AdForm = () => {
         <Form.Group as={Col} sm={3} controlId="brand">
           <Form.Label>Brand</Form.Label>
           <Form.Control as="select" name="brand" onChange={handleBrandChange}>
-            <option key="" value="">
+            <option key="" value={JSON.stringify({ models: [] })}>
               Select Brand
             </option>
-            {brands.map((b) => (
-              <option key={b.id} value={JSON.stringify(b)}>
+            {brands.map((b, i) => (
+              <option key={i} value={JSON.stringify(b)}>
                 {b.name}
               </option>
             ))}
@@ -111,9 +136,11 @@ const AdForm = () => {
         <Form.Group as={Col} sm={3} controlId="model">
           <Form.Label>Model</Form.Label>
           <Form.Control as="select" name="model" onChange={handleChange}>
-            <option>Select Model</option>
-            {models.map((b) => (
-              <option key={b} value={b}>
+            <option key="" value="">
+              Select Model
+            </option>
+            {models.map((b, index) => (
+              <option key={index} value={b}>
                 {b}
               </option>
             ))}
@@ -132,11 +159,11 @@ const AdForm = () => {
         <Form.Group as={Col} sm={3} controlId="category">
           <Form.Label>Category</Form.Label>
           <Form.Control as="select" name="category" onChange={handleChange}>
-            <option>Select Category</option>
-            <option>Estate</option>
-            <option>Hatchback</option>
-            <option>Coupe</option>
-            <option>Van</option>
+            <option key="select category">Select Category</option>
+            <option key="Estate">Estate</option>
+            <option key="Hatchback">Hatchback</option>
+            <option key="Coupe">Coupe</option>
+            <option key="Van">Van</option>
           </Form.Control>
         </Form.Group>
 
@@ -206,7 +233,7 @@ const AdForm = () => {
         </Form.Group>
       </Form.Row>
       <Form.Row>
-        <Form.Group as={Col} sm={6} controlId="description">
+        <Form.Group as={Col} sm={5} controlId="description">
           <Form.Label>Description</Form.Label>
           <Form.Control
             as="textarea"
@@ -215,6 +242,25 @@ const AdForm = () => {
             onChange={handleChange}
           />
         </Form.Group>
+        <Form.Group as={Col} sm={1}>
+          <Form.Label>Add Photos</Form.Label>
+          <Form.File
+            onChange={handleImageAsFile}
+            name="image"
+            type="file"
+            id="add-picture"
+          />
+        </Form.Group>
+        <div as={Col} sm={3}>
+          {pictures.map((p, i) => (
+            <img
+              className={styles["image-preview"]}
+              key={i}
+              src={p}
+              alt="pic"
+            />
+          ))}
+        </div>
       </Form.Row>
       <Form.Row>
         <Form.Group as={Col} sm={3} controlId="city">
@@ -239,4 +285,4 @@ const AdForm = () => {
   );
 };
 
-export default AdForm;
+export default withRouter(AdForm);
