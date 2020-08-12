@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
 import FormValidation from "../../utils/from-validation";
 import validateRegister from "./validation";
@@ -25,10 +25,11 @@ const Register = (props) => {
     errors,
   } = FormValidation(INITIAL_STATE, validateRegister, handleRegister);
 
-  const [firebaseError, setFirebaseError] = React.useState(null);
+  const [firebaseError, setFirebaseError] = useState(null);
 
   function handleRegister() {
-    const { name, phone, email, password } = values;
+    const { name, phone, email, password, rePassword } = values;
+
     try {
       firebase.register(name, phone, email, password);
       props.history.push("/");
@@ -91,7 +92,6 @@ const Register = (props) => {
               {errors.password && (
                 <p className="error-text">{errors.password}</p>
               )}
-              {firebaseError && <p className="error-text">{firebaseError}</p>}
             </Form.Group>
             <Form.Group>
               <Form.Label>Repeat Password</Form.Label>

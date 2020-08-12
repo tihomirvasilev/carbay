@@ -37,6 +37,7 @@ const AdForm = (props) => {
   const [years, setYears] = useState([]);
   const [pictureFile, setPictureFile] = useState([]);
   const [pictures, setPictures] = useState([]);
+  console.log(user);
 
   useEffect(() => {
     async function getBrands() {
@@ -110,6 +111,11 @@ const AdForm = (props) => {
       city: values.city,
       address: values.address,
       imageUrls: pictures,
+      creator: {
+        id: user.uid,
+        name: user.displayName,
+        phone: user.phoneNumber,
+      },
     };
     console.log(newAd);
     await firebase.db.collection("ads").add(newAd);
