@@ -3,39 +3,42 @@ import { Row, Col, Nav } from "react-bootstrap";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import styles from "./index.module.css";
 
-const Ad = () => {
+const Ad = (props) => {
   return (
     <>
       <Row className={styles["ad-card"]}>
         <Col md={2}>
           <img
             className={styles["image-small"]}
-            src="https://firebasestorage.googleapis.com/v0/b/carbay-b65be.appspot.com/o/ads%2FVEPWlWhrkFQ561yuadLEG2QlG923-car.jpg?alt=media&token=d406df55-e059-485d-a181-0131a39bff96"
+            src={props.ad.imageUrls[0]}
+            alt="img"
           ></img>
         </Col>
         <Col md={{ span: 3, offset: 1 }}>
-          <span className={styles.date}>today, 01:13</span>
+          <span className={styles.date}>
+            {props.ad.createdOn.toLocaleString()}
+          </span>
           <br />
           <a className={styles["car-link"]} href="/">
-            <span className={styles["car-name"]}>VW GOLF</span>
+            <span className={styles["car-name"]}>
+              {props.ad.brand} {props.ad.model}
+            </span>
           </a>
           <br />
-          <span className={styles.milage}>185 000 km</span>
+          <span className={styles.milage}>{props.ad.milage} km</span>
           <p className={styles.description}>
-            Перфектно техническо състояние. Без ражди и драскотини. Всичко с
-            което е оборудван автомобила работи е оборудван автомобила работи е
-            оборудван автомобила работи
+            {props.ad.description.substring(0, 90)} ...
           </p>
         </Col>
         <Col md={1}>
-          <span>2005 g.</span>
+          <span>{props.ad.firstRegistration} г.</span>
         </Col>
         <Col md={1}>
-          <span>7 000 lv.</span>
+          <span>{props.ad.price} лв.</span>
         </Col>
         <Col md={2}>
-          <span>Tihomir Vasilev</span>
-          <p>Varna</p>
+          <span>{props.ad.creator.name}</span>
+          <p>{props.ad.city}</p>
         </Col>
         <Col xs={0} md={1}>
           <Nav.Link className={styles.fav}>
