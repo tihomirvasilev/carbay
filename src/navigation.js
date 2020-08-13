@@ -13,6 +13,7 @@ import ModelsAdminPage from "./pages/admin-models";
 import OptionsAdminPage from "./pages/admin-options";
 import NewAd from "./pages/new-ad";
 import AdDetailsPage from "./pages/ad-details";
+import FavoritesPage from "./pages/favorites";
 
 const Navigation = () => {
   const user = useAuth();
@@ -33,6 +34,7 @@ const Navigation = () => {
           <Route path="/admin/users" component={AdminPage} />
           <Route path="/admin/ads" component={AdminPage} />
           <Route path="/ad/:id" component={AdDetailsPage} />
+          <Route path="/favorites" component={FavoritesPage} />
         </Switch>
       </FirebaseContext.Provider>
     </BrowserRouter>

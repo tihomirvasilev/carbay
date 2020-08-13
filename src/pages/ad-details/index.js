@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Container, Carousel } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
 import { Row, Col } from "react-bootstrap";
+
 import Layout from "../../components/layout";
 import styles from "./index.module.css";
 
@@ -51,7 +52,11 @@ const AdDetailsPage = (props) => {
             <div>{ad.description}</div>
           </Col>
           <Col className={styles.image} lg={6}>
-            <Carousel activeIndex={index} onSelect={handleSelect}>
+            <Carousel
+              interval={null}
+              activeIndex={index}
+              onSelect={handleSelect}
+            >
               {images.map((image, index) => (
                 <Carousel.Item>
                   <img className="d-block w-100" src={image} alt="" />

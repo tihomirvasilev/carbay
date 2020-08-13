@@ -4,8 +4,8 @@ import { Container } from "react-bootstrap";
 import Layout from "../../components/layout";
 import AdsList from "../../components/ads-list";
 
-const MyAdsPage = () => {
-  //TODO: fileter my ads
+const FavoritesPage = () => {
+  //TODO: filter my favorite ads
   return (
     <Layout>
       <Container>
@@ -15,4 +15,4 @@ const MyAdsPage = () => {
   );
 };
 
-export default MyAdsPage;
+export default FavoritesPage;
