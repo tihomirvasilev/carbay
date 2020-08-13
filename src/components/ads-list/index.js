@@ -1,9 +1,18 @@
 import React from "react";
+import Ad from "../ad";
 
 const AdsList = () => {
   return (
     <>
-      <div>ADS LIST</div>
+      <Ad />
+      <Ad />
+      <Ad />
+      <Ad />
+      <Ad />
+      <Ad />
+      <Ad />
+      <Ad />
+      <Ad />
     </>
   );
 };

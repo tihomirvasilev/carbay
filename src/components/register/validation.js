@@ -12,7 +12,8 @@ export default function validateRegister(values) {
     errors.password = "Password required";
   } else if (values.password.length < 6) {
     errors.password = "Password must be at least 6 characters";
+  } else if (values.password !== values.rePassword) {
+    errors.password = "Passwords must be equals";
   }
-
   return errors;
 }

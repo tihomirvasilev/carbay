@@ -3,15 +3,14 @@
   background-color: rgba(250, 250, 250);
   text-align: center;
   justify-content: space-around;
-  position: fixed;
+  padding-top: 30px;
   left: 0;
   bottom: 0;
   right: 0;
 }
 
-.brand {
+.logo {
   color: orangered !important;
-  font-size: 200% !important;
   font-weight: bolder;
   text-transform: uppercase;
   text-align: center;

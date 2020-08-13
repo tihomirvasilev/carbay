@@ -43,10 +43,6 @@ class Firebase {
       await localStorage.removeItem("auth-token");
     });
   }
-
-  async resetPassword(email) {
-    await this.auth.sendPasswordResetEmail(email);
-  }
 }
 
 const firebase = new Firebase();
