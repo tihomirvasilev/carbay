@@ -22,7 +22,7 @@ const INITIAL_STATE = {
   city: "",
   address: "",
   imageUrls: [],
-  image: "",
+  phone: "",
 };
 
 const AdForm = (props) => {
@@ -111,10 +111,11 @@ const AdForm = (props) => {
       city: values.city,
       address: values.address,
       imageUrls: pictures,
+      phone: values.phone,
+      createdOn: Date.now(),
       creator: {
         id: user.uid,
         name: user.displayName,
-        phone: user.phoneNumber,
       },
     };
     console.log(newAd);
@@ -152,7 +153,7 @@ const AdForm = (props) => {
             ))}
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId="modification">
+        <Form.Group as={Col} sm={3} controlId="modification">
           <Form.Label>Modification</Form.Label>
           <Form.Control
             name="modification"
@@ -269,6 +270,14 @@ const AdForm = (props) => {
         </div>
       </Form.Row>
       <Form.Row>
+        <Form.Group as={Col} sm={3} controlId="phone">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            name="phone"
+            onChange={handleChange}
+            placeholder="Enter Phone Number"
+          />
+        </Form.Group>
         <Form.Group as={Col} sm={3} controlId="city">
           <Form.Label>City</Form.Label>
           <Form.Control

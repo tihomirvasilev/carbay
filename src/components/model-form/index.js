@@ -62,11 +62,11 @@ const ModelForm = () => {
             as="select"
             name="brand"
             onChange={handleChangeOption}
-            value={brandId}
+            value={values.brand}
           >
             <option value="">SELECT BRAND</option>
-            {brands.map((b) => (
-              <option key={b.id} value={JSON.stringify(b)}>
+            {brands.map((b, index) => (
+              <option key={index} value={JSON.stringify(b)}>
                 {b.name}
               </option>
             ))}
