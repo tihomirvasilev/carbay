@@ -4,10 +4,12 @@ import { Container } from "react-bootstrap";
 import Layout from "../../components/layout";
 import AdsList from "../../components/ads-list";
 
+import styles from "./index.module.css";
+
 const HomePage = () => {
   return (
     <Layout>
-      <Container>
+      <Container className={styles.body}>
         <AdsList />
       </Container>
     </Layout>

@@ -28,7 +28,7 @@ const Register = (props) => {
   const [firebaseError, setFirebaseError] = useState(null);
 
   function handleRegister() {
-    const { name, phone, email, password, rePassword } = values;
+    const { name, phone, email, password } = values;
 
     try {
       firebase.register(name, phone, email, password);

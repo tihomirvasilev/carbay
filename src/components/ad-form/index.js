@@ -101,22 +101,20 @@ const AdForm = (props) => {
       model: values.model,
       modification: values.modification,
       category: values.category,
-      firstRegistration: values.firstRegistration,
+      firstRegistration: Number(values.firstRegistration),
       milage: Number(values.milage),
       engine: values.engine,
       transmission: values.transmission,
-      power: values.power,
-      price: values.price,
+      power: Number(values.power),
+      price: Number(values.price),
       description: values.description,
       city: values.city,
       address: values.address,
       imageUrls: pictures,
       phone: values.phone,
       createdOn: Date.now(),
-      creator: {
-        id: user.uid,
-        name: user.displayName,
-      },
+      creatorId: user.uid,
+      creatorName: user.displayName,
     };
     console.log(newAd);
     await firebase.db.collection("ads").add(newAd);
