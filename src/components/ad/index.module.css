@@ -1,14 +1,24 @@
-.image-small {
-  width: 160px;
-  height: auto;
+.thumbnail {
+  width: 150px;
+  height: 100px;
+  margin: auto;
 }
 
 .date {
-  font-size: 0.85em;
-  font-style: italic;
+  font-size: 0.7em;
+  font-style: oblique;
+}
+.first-reg {
+  font-size: 0.8em;
+  font-weight: bold;
 }
 
-.car-name {
+.bold-md {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.bold-lg {
   font-size: 1.1em;
   font-weight: bold;
 }
@@ -20,29 +30,36 @@
 
 .car-link :hover {
   text-decoration: none;
+  color: orangered;
 }
 
 .milage {
   font-size: smaller;
-  font-weight: bold;
 }
 
 .description {
   word-break: break-all;
-  margin-top: 10px;
+  margin-top: 5px;
   font-style: italic;
-  font-size: 0.9em;
+  font-size: 0.85em;
 }
 
-.ad-card {
-  margin: 5px;
+.ad-wrapper {
+  margin: 10px;
 }
 
-.hr {
-  margin: 0px;
-  padding: 0px;
+.fav-orange {
+  color: orangered;
 }
 
-.fav {
+.fav-orange :hover {
+  color: black;
+}
+
+.fav-black {
+  color: black;
+}
+
+.fav-black :hover {
   color: orangered;
 }

@@ -7,7 +7,7 @@ const OptionsList = () => {
 
   useEffect(() => {
     getOptions();
-  });
+  }, []);
 
   function getOptions() {
     return firebase.db

@@ -1,55 +1,66 @@
 import React from "react";
-import { Row, Col, Nav } from "react-bootstrap";
-import { BsHeart, BsHeartFill } from "react-icons/bs";
+import { Link, withRouter } from "react-router-dom";
+import { Row, Col, Container } from "react-bootstrap";
+import { BsHeartFill } from "react-icons/bs";
+import DateFormat from "../../utils/date";
 import styles from "./index.module.css";
 
-const Ad = (props) => {
+const Ad = ({
+  id,
+  imageUrls,
+  createdOn,
+  brand,
+  model,
+  milage,
+  description,
+  firstRegistration,
+  price,
+  city,
+}) => {
   return (
-    <>
-      <Row className={styles["ad-card"]}>
-        <Col md={2}>
-          <img
-            className={styles["image-small"]}
-            src={props.ad.imageUrls[0]}
-            alt="img"
-          ></img>
+    <Container fluid>
+      <Row className={styles["ad-wrapper"]}>
+        <Col lg={{ span: 2, offset: 1 }}>
+          <Link className={styles["car-link"]} id={id} to={"/ad/" + id}>
+            <img
+              className={styles["thumbnail"]}
+              src={imageUrls[0]}
+              alt="img"
+            ></img>
+          </Link>
         </Col>
-        <Col md={{ span: 3, offset: 1 }}>
-          <span className={styles.date}>
-            {props.ad.createdOn.toLocaleString()}
-          </span>
-          <br />
-          <a className={styles["car-link"]} href="/">
-            <span className={styles["car-name"]}>
-              {props.ad.brand} {props.ad.model}
-            </span>
-          </a>
-          <br />
-          <span className={styles.milage}>{props.ad.milage} km</span>
+        <Col lg={4}>
+          <div className={styles.date}>{DateFormat(createdOn)}</div>
+          <Link className={styles["car-link"]} id={id} to={"/ad/" + id}>
+            <div className={styles["bold-lg"]}>
+              {brand} {model}
+            </div>
+          </Link>
+          <div className={styles.milage}>{milage} км.</div>
           <p className={styles.description}>
-            {props.ad.description.substring(0, 90)} ...
+            {description.substring(0, 65)} ...
           </p>
         </Col>
-        <Col md={1}>
-          <span>{props.ad.firstRegistration} г.</span>
+        <Col lg={1}>
+          <div className={styles["first-reg"]}>{firstRegistration} г.</div>
         </Col>
-        <Col md={1}>
-          <span>{props.ad.price} лв.</span>
+        <Col lg={1}>
+          <div className={styles["bold-md"]}>{price} лв.</div>
         </Col>
-        <Col md={2}>
-          <span>{props.ad.creator.name}</span>
-          <p>{props.ad.city}</p>
+        <Col lg={1}>
+          <div className={styles["bold-md"]}>{city}</div>
         </Col>
-        <Col xs={0} md={1}>
-          <Nav.Link className={styles.fav}>
-            <BsHeart />
-            <BsHeartFill />
-          </Nav.Link>
+        <Col lg={1}>
+          <div>
+            <BsHeartFill className={styles["fav-orange"]} />
+          </div>
+          <div>
+            <BsHeartFill className={styles["fav-black"]} />
+          </div>
         </Col>
       </Row>
-      <hr className={styles.hr} />
-    </>
+    </Container>
   );
 };
 
-export default Ad;
+export default withRouter(Ad);

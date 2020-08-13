@@ -25,7 +25,7 @@ const AdsList = (props) => {
   return (
     <>
       {ads.map((ad, index) => (
-        <Ad key={index} ad={ad} />
+        <Ad key={index} {...ad} />
       ))}
     </>
   );

@@ -19,9 +19,9 @@ const Menu = () => {
       >
         {user && (
           <>
-            <NavDropdown.Item href="/favorites">Favorites</NavDropdown.Item>
             <NavDropdown.Item href="/new-ad">New Add</NavDropdown.Item>
             <NavDropdown.Item href="/my-ads">My Ads</NavDropdown.Item>
+            <NavDropdown.Item href="/favorites">Favorites</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Divider />
