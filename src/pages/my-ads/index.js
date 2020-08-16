@@ -5,7 +5,7 @@ import Layout from "../../components/layout";
 import AdsList from "../../components/ads-list";
 
 const MyAdsPage = () => {
-  //TODO: fileter my ads
+  //TODO: filter my ads
   return (
     <Layout>
       <Container>
