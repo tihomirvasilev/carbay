@@ -11,7 +11,7 @@ const AdminPage = () => {
       <Container>
         <Title title={"Admin Panel"} />
         <AdminPanelNav>
-          <Jumbotron>Hello, Admin!</Jumbotron>
+          <Jumbotron>Hello, Administrator!</Jumbotron>
         </AdminPanelNav>
       </Container>
     </Layout>

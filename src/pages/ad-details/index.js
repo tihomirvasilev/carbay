@@ -7,29 +7,23 @@ import { Row, Col } from "react-bootstrap";
 import Layout from "../../components/layout";
 import styles from "./index.module.css";
 
+const INITIAL_STATE = {
+  brand: "",
+  model: "",
+  modification: "",
+  category: "",
+  milage: "",
+  description: "",
+  imageUrls: [],
+};
 const AdDetailsPage = (props) => {
   const { id } = props.match.params;
   const { firebase, user } = useContext(FirebaseContext);
 
-  const [ad, setCurrentAd] = useState({});
-  const [images, setImages] = useState([]);
+  const [ad, setAd] = useState(INITIAL_STATE);
 
   useEffect(() => {
-    async function getAd() {
-      await firebase.db
-        .collection("ads")
-        .doc(id)
-        .get()
-        .then(async (doc) => {
-          const ad = await doc.data();
-          setCurrentAd(ad);
-          setImages(ad.imageUrls);
-          console.log(ad);
-          console.log(ad.imageUrls);
-        })
-        .catch((e) => console.log(e));
-    }
-    getAd();
+    firebase.getDoc("ads", id, setAd);
   }, [firebase, id]);
 
   const [index, setIndex] = useState(0);
@@ -57,8 +51,8 @@ const AdDetailsPage = (props) => {
               activeIndex={index}
               onSelect={handleSelect}
             >
-              {images.map((image, index) => (
-                <Carousel.Item>
+              {ad.imageUrls.map((image, index) => (
+                <Carousel.Item key={index}>
                   <img className="d-block w-100" src={image} alt="" />
                 </Carousel.Item>
               ))}

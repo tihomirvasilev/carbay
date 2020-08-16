@@ -1,13 +1,21 @@
-import React from "react";
-import BrandForm from "../../components/brand-form";
-import BrandsList from "../../components/brands-list";
-
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { FirebaseContext } from "../../firebase";
 import AdminPanelNav from "../../components/admin-nav";
 import Title from "../../components/title";
 import Layout from "../../components/layout";
+import BrandForm from "../../components/brand-form";
+import BrandsList from "../../components/brands-list";
 
 const BrandsAdmin = () => {
+  const { firebase } = useContext(FirebaseContext);
+
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    firebase.getCollectionSnapshotDocs("brands", setBrands);
+  }, [firebase]);
+
   return (
     <Layout>
       <Container>
@@ -18,7 +26,7 @@ const BrandsAdmin = () => {
             <Col sm={5}>
               <BrandForm />
               <br />
-              <BrandsList />
+              <BrandsList brands={brands} />
             </Col>
           </Row>
         </AdminPanelNav>

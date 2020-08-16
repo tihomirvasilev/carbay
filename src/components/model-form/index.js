@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import FirebaseContext from "../../firebase/context";
 import FormValidation from "../../utils/from-validation";
 import ValidateModel from "./validation";
+import ModelsList from "../models-list";
 
 const INITIAL_STATE = {
   brand: "",
@@ -20,22 +21,10 @@ const ModelForm = () => {
   );
 
   const [brands, setBrands] = useState([]);
-  const [brandId, setBrandId] = useState("");
   const [models, setModels] = useState([]);
 
   useEffect(() => {
-    function getBrandsList() {
-      return firebase.db.collection("brands").onSnapshot(handleSnapshot);
-    }
-
-    async function handleSnapshot(snapshot) {
-      const brands = await snapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
-      });
-      setBrands(brands);
-    }
-
-    getBrandsList();
+    firebase.getCollectionSnapshotDocs("brands", setBrands);
   }, [firebase]);
 
   async function AddModel() {
@@ -49,7 +38,6 @@ const ModelForm = () => {
 
   function handleChangeOption(e) {
     const currentBrand = JSON.parse(e.target.value);
-    setBrandId(currentBrand.id);
     setModels(currentBrand.models);
     handleChange(e);
   }
@@ -84,13 +72,7 @@ const ModelForm = () => {
         <Button type="submit">Add</Button>
       </Form>
       <br />
-      {models.length > 0 && (
-        <ul>
-          {models.map((model, index) => (
-            <li key={index}>{model}</li>
-          ))}
-        </ul>
-      )}
+      <ModelsList models={models} />
     </>
   );
 };

@@ -1,4 +1,9 @@
 .body {
-  padding-top: 90px;
   margin-bottom: 90px;
+}
+
+.image-preview {
+  margin: 5px;
+  width: auto;
+  height: 50px;
 }
