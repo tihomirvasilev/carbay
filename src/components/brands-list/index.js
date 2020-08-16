@@ -1,15 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
-import { FirebaseContext } from "../../firebase";
+import React from "react";
 
-const BrandsList = () => {
-  const { firebase } = useContext(FirebaseContext);
-
-  const [brands, setBrands] = useState([]);
-
-  useEffect(() => {
-    firebase.getCollectionSnapshotDocs("brands", setBrands);
-  }, [firebase]);
-
+const BrandsList = ({ brands }) => {
   return (
     <ul>
       {brands.map((b, id) => (

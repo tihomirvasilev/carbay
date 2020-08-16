@@ -1,16 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { FirebaseContext } from "../../firebase";
-
+import React from "react";
 import Ad from "../ad";
 
-const AdsList = (props) => {
-  const { firebase } = useContext(FirebaseContext);
-  const [ads, setAds] = useState([]);
-
-  useEffect(() => {
-    firebase.getCollectionDocs("ads", setAds);
-  }, [firebase]);
-
+const AdsList = ({ ads }) => {
   return (
     <>
       {ads.map((ad, index) => (

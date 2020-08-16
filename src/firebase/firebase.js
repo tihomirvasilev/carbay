@@ -44,7 +44,24 @@ class Firebase {
     });
   }
 
-  getDoc(collection, id) {}
+  async getDoc(collection, id, setState) {
+    const docRef = this.db.collection(collection).doc(id);
+
+    docRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          setState(doc.data());
+          console.log("Document data:", doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+  }
 
   async getCollectionDocs(collection, setState) {
     const data = await this.db.collection(collection).get();
@@ -54,7 +71,7 @@ class Firebase {
 
   async getCollectionSnapshotDocs(collection, setState) {
     firebase.db
-      .collection("brands")
+      .collection(collection)
       .orderBy("name")
       .onSnapshot(async (snapshot) => {
         const docs = await snapshot.docs.map((doc) => {
