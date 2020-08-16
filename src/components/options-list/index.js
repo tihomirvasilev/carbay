@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { FirebaseContext } from "../../firebase";
 
-const OptionsList = () => {
+const OptionsList = ({ options }) => {
   const { firebase } = useContext(FirebaseContext);
   const [options, setOptions] = useState([]);
 

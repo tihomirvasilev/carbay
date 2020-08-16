@@ -43,6 +43,26 @@ class Firebase {
       await localStorage.removeItem("auth-token");
     });
   }
+
+  getDoc(collection, id) {}
+
+  async getCollectionDocs(collection, setState) {
+    const data = await this.db.collection(collection).get();
+
+    setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  }
+
+  async getCollectionSnapshotDocs(collection, setState) {
+    firebase.db
+      .collection("brands")
+      .orderBy("name")
+      .onSnapshot(async (snapshot) => {
+        const docs = await snapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+        setState(docs);
+      });
+  }
 }
 
 const firebase = new Firebase();

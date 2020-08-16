@@ -26,11 +26,6 @@ const OptionForm = (props) => {
         const { name } = values;
         const newOption = {
           name,
-          createdBy: {
-            id: user.uid,
-            name: user.displayName,
-          },
-          created: Date.now(),
         };
         firebase.db.collection("options").add(newOption);
         props.history.push("/admin/options");

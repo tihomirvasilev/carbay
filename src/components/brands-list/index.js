@@ -7,20 +7,7 @@ const BrandsList = () => {
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
-    function getBrands() {
-      return firebase.db
-        .collection("brands")
-        .orderBy("name")
-        .onSnapshot(handleSnapshot);
-    }
-
-    async function handleSnapshot(snapshot) {
-      const brands = await snapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
-      });
-      setBrands(brands);
-    }
-    getBrands();
+    firebase.getCollectionSnapshotDocs("brands", setBrands);
   }, [firebase]);
 
   return (

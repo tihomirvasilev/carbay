@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   email: "",
   password: "",
 };
+
 const Login = (props) => {
   const { firebase } = useContext(FirebaseContext);
   const { handleSubmit, handleChange, values } = FormValidation(

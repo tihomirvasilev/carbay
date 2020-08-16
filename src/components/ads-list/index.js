@@ -8,18 +8,7 @@ const AdsList = (props) => {
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
-    function getAds() {
-      return firebase.db.collection("ads").onSnapshot(handleSnapshot);
-    }
-
-    async function handleSnapshot(snapshot) {
-      const adsDb = await snapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
-      });
-      setAds(adsDb);
-      console.log(adsDb);
-    }
-    getAds();
+    firebase.getCollectionDocs("ads", setAds);
   }, [firebase]);
 
   return (

@@ -40,33 +40,8 @@ const AdForm = (props) => {
   const [pictures, setPictures] = useState([]);
 
   useEffect(() => {
-    async function getBrands() {
-      const brands = [];
-      await firebase.db
-        .collection("brands")
-        .get()
-        .then((qs) => {
-          qs.docs.forEach((doc) => {
-            brands.push(doc.data());
-          });
-        })
-        .catch((e) => console.log(e));
-      setBrands(brands);
-    }
-
-    async function getOptions() {
-      const optionsDb = [];
-      await firebase.db
-        .collection("options")
-        .get()
-        .then((qs) => {
-          qs.docs.forEach((doc) => {
-            optionsDb.push(doc.data().name);
-          });
-        })
-        .catch((e) => console.error);
-      setOptions(optionsDb);
-    }
+    firebase.getCollectionDocs("brands", setBrands);
+    firebase.getCollectionDocs("options", setOptions);
 
     function generateYearsTillNow() {
       let years = [];
@@ -79,8 +54,6 @@ const AdForm = (props) => {
       setYears(years);
     }
     generateYearsTillNow();
-    getBrands();
-    getOptions();
   }, [firebase]);
 
   function handleOptionCheckbox(e) {
@@ -321,13 +294,13 @@ const AdForm = (props) => {
         <Form.Group as={Col} controlId="formBasicCheckbox">
           <Row sm={12}>
             {options.map((option, index) => (
-              <Col key={index} sm={1}>
+              <Col key={index} sm={2}>
                 <Form.Check
                   onChange={handleOptionCheckbox}
                   type="checkbox"
-                  key={index}
-                  label={option}
-                  name={option}
+                  key={option.id}
+                  label={option.name}
+                  name={option.name}
                 />
               </Col>
             ))}
