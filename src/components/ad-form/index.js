@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Form, Col, Button } from "react-bootstrap";
+import { Form, Col, Button, Row } from "react-bootstrap";
+import randomString from "crypto-random-string";
 import { FirebaseContext } from "../../firebase";
-
 import FormValidation from "../../utils/from-validation";
 import validateAd from "./validateAd";
 import styles from "./index.module.css";
@@ -34,10 +34,10 @@ const AdForm = (props) => {
   );
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
+  const [options, setOptions] = useState([]);
+  const [currentOptions, setCurrentOptions] = useState([]);
   const [years, setYears] = useState([]);
-  const [pictureFile, setPictureFile] = useState([]);
   const [pictures, setPictures] = useState([]);
-  console.log(user);
 
   useEffect(() => {
     async function getBrands() {
@@ -45,13 +45,27 @@ const AdForm = (props) => {
       await firebase.db
         .collection("brands")
         .get()
-        .then((querySnapshot) => {
-          querySnapshot.docs.forEach((doc) => {
+        .then((qs) => {
+          qs.docs.forEach((doc) => {
             brands.push(doc.data());
           });
         })
         .catch((e) => console.log(e));
       setBrands(brands);
+    }
+
+    async function getOptions() {
+      const optionsDb = [];
+      await firebase.db
+        .collection("options")
+        .get()
+        .then((qs) => {
+          qs.docs.forEach((doc) => {
+            optionsDb.push(doc.data().name);
+          });
+        })
+        .catch((e) => console.error);
+      setOptions(optionsDb);
     }
 
     function generateYearsTillNow() {
@@ -66,7 +80,21 @@ const AdForm = (props) => {
     }
     generateYearsTillNow();
     getBrands();
+    getOptions();
   }, [firebase]);
+
+  function handleOptionCheckbox(e) {
+    const tempOptions = [...currentOptions];
+    const index = tempOptions.indexOf(e.target.name);
+    if (index !== -1) {
+      tempOptions.splice(index, 1);
+    } else {
+      tempOptions.push(e.target.name);
+    }
+
+    setCurrentOptions([...tempOptions]);
+    console.log(tempOptions);
+  }
 
   function handleBrandChange(e) {
     const currentBrand = JSON.parse(e.target.value);
@@ -76,15 +104,15 @@ const AdForm = (props) => {
 
   async function handleImageAsFile(e) {
     e.persist();
-    const imageUrls = pictures;
-    console.log(user.uid);
+    const uniqueImageName = randomString({ length: 30, type: "base64" });
+    const imageUrls = [...pictures];
     const file = e.target.files[0];
     const metadata = {
       contentType: "image/jpeg",
     };
 
     const uploadTask = await firebase.storage
-      .ref(`/ads/${user.uid}-${file.name}`)
+      .ref(`/ads/${user.uid}-${uniqueImageName}`)
       .put(file, metadata);
 
     await uploadTask.ref.getDownloadURL().then(function (downloadURL) {
@@ -92,11 +120,11 @@ const AdForm = (props) => {
     });
 
     setPictures(imageUrls);
-    setPictureFile(file);
   }
 
   async function createAd() {
     const newAd = {
+      imageUrls: pictures,
       brand: JSON.parse(values.brand).name,
       model: values.model,
       modification: values.modification,
@@ -106,17 +134,16 @@ const AdForm = (props) => {
       engine: values.engine,
       transmission: values.transmission,
       power: Number(values.power),
+      options: currentOptions,
       price: Number(values.price),
       description: values.description,
       city: values.city,
-      address: values.address,
-      imageUrls: pictures,
       phone: values.phone,
       createdOn: Date.now(),
       creatorId: user.uid,
       creatorName: user.displayName,
     };
-    console.log(newAd);
+
     await firebase.db.collection("ads").add(newAd);
     props.history.push("/");
   }
@@ -137,7 +164,6 @@ const AdForm = (props) => {
             ))}
           </Form.Control>
         </Form.Group>
-
         <Form.Group as={Col} sm={3} controlId="model">
           <Form.Label>Model</Form.Label>
           <Form.Control as="select" name="model" onChange={handleChange}>
@@ -238,6 +264,31 @@ const AdForm = (props) => {
         </Form.Group>
       </Form.Row>
       <Form.Row>
+        <Form.Group as={Col} sm={5}>
+          <Form.Label>Add Photos</Form.Label>
+          <Form.File
+            onChange={handleImageAsFile}
+            name="image"
+            type="file"
+            id="add-picture"
+          />
+        </Form.Group>
+        <Col>
+          <Row>
+            <div as={Col} sm={7}>
+              {pictures.map((p, i) => (
+                <img
+                  className={styles["image-preview"]}
+                  key={i}
+                  src={p}
+                  alt="pic"
+                />
+              ))}
+            </div>
+          </Row>
+        </Col>
+      </Form.Row>
+      <Form.Row>
         <Form.Group as={Col} sm={5} controlId="description">
           <Form.Label>Description</Form.Label>
           <Form.Control
@@ -247,25 +298,6 @@ const AdForm = (props) => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group as={Col} sm={1}>
-          <Form.Label>Add Photos</Form.Label>
-          <Form.File
-            onChange={handleImageAsFile}
-            name="image"
-            type="file"
-            id="add-picture"
-          />
-        </Form.Group>
-        <div as={Col} sm={3}>
-          {pictures.map((p, i) => (
-            <img
-              className={styles["image-preview"]}
-              key={i}
-              src={p}
-              alt="pic"
-            />
-          ))}
-        </div>
       </Form.Row>
       <Form.Row>
         <Form.Group as={Col} sm={3} controlId="phone">
@@ -284,13 +316,22 @@ const AdForm = (props) => {
             placeholder="Enter City"
           />
         </Form.Group>
-        <Form.Group as={Col} sm={3} controlId="address">
-          <Form.Label>Address</Form.Label>
-          <Form.Control
-            name="address"
-            onChange={handleChange}
-            placeholder="Enter Address"
-          />
+      </Form.Row>
+      <Form.Row>
+        <Form.Group as={Col} controlId="formBasicCheckbox">
+          <Row sm={12}>
+            {options.map((option, index) => (
+              <Col key={index} sm={1}>
+                <Form.Check
+                  onChange={handleOptionCheckbox}
+                  type="checkbox"
+                  key={index}
+                  label={option}
+                  name={option}
+                />
+              </Col>
+            ))}
+          </Row>
         </Form.Group>
       </Form.Row>
       <Button type="submit">Add</Button>

@@ -7,24 +7,23 @@ const ModelsList = (props) => {
   const [models, setModels] = useState(null);
 
   useEffect(() => {
-    getModels();
-  });
+    function getModels() {
+      if (props.brandId === "") {
+        return;
+      }
+      const modelsDb = firebase.db
+        .collection("brands")
+        .doc(props.brandId)
+        .get()
+        .then((doc) => {
+          console.log(doc.data().models);
+        });
 
-  function getModels() {
-    if (props.brandId === "") {
-      return;
+      setModels(modelsDb);
     }
-    const modelsDb = firebase.db
-      .collection("brands")
-      .doc(props.brandId)
-      .get()
-      .then((res) => {
-        console.log(res.data().models);
-      });
 
-    setModels(modelsDb);
-    console.log(models);
-  }
+    getModels();
+  }, [firebase, models, props.brandId]);
 
   return (
     <div>
