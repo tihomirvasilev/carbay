@@ -23,7 +23,7 @@ class Firebase {
 
         this.db.collection("users").add({
           uid: res.user.uid,
-          phoneNumber: phone,
+          roles: "admin",
         });
 
         const token = await Object.entries(res.user)[5][1].b;

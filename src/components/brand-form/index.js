@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import FirebaseContext from "../../firebase/context";
+import Input from "../input";
 import validateBrand from "./validateBrand";
 import FormValidation from "../../utils/from-validation";
 
@@ -14,10 +15,10 @@ const Brands = (props) => {
   const { handleSubmit, handleChange, values, errors } = FormValidation(
     INITIAL_STATE,
     validateBrand,
-    handleCreateBrand
+    createBrand
   );
 
-  function handleCreateBrand() {
+  function createBrand() {
     const hasErrors = Object.keys(errors).length > 0;
     if (!user) {
       props.history.push("/login");
@@ -26,31 +27,23 @@ const Brands = (props) => {
         const { name } = values;
         const newBrand = {
           name,
-          createdBy: {
-            id: user.uid,
-            name: user.displayName,
-          },
-          created: Date.now(),
           models: [],
         };
+
         firebase.db.collection("brands").add(newBrand);
-        props.history.push("/admin/brands");
       }
     }
   }
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group>
-        <Form.Control
-          onChange={handleChange}
-          name="name"
-          type="text"
-          placeholder="Brand Name"
-          value={values.name}
-        />
-        {errors.name && <p>{errors.name}</p>}
-      </Form.Group>
+      <Input
+        name="name"
+        placeHolder="Enter Brand"
+        value={values.name}
+        onChange={handleChange}
+        errors={errors}
+      />
       <Button type="submit">Add</Button>
     </Form>
   );
