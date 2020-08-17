@@ -1,0 +1,15 @@
+.fav-orange {
+  color: orangered;
+}
+
+.fav-orange :hover {
+  color: black;
+}
+
+.fav-black {
+  color: black;
+}
+
+.fav-black :hover {
+  color: orangered;
+}
