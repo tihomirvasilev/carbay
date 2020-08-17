@@ -23,7 +23,8 @@ class Firebase {
 
         this.db.collection("users").add({
           uid: res.user.uid,
-          roles: "admin",
+          roles: "user",
+          favorites: [],
         });
 
         const token = await Object.entries(res.user)[5][1].b;
@@ -61,6 +62,12 @@ class Firebase {
       .catch(function (error) {
         console.log("Error getting document:", error);
       });
+  }
+  async getUserById(id) {
+    const data = await this.db.collection("users").where("uid", "==", id).get();
+
+    const users = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    return users[0];
   }
 
   async getCollectionDocs(collection, setState) {
