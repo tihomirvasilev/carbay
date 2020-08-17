@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Row, Col, Button, Form } from "react-bootstrap";
+
 import FirebaseContext from "../../firebase/context";
 import validateOption from "../../pages/admin-options/validateOption";
 import FormValidation from "../../utils/from-validation";
-import AdminPanelNav from "../../components/admin-nav";
-import Layout from "../../components/layout";
 import OptionsList from "../../components/options-list";
-import Title from "../../components/title";
+import AdminLayout from "../../components/admin-layout";
 
 const INITIAL_STATE = {
   name: "",
@@ -43,30 +42,27 @@ const OptionsPage = (props) => {
   }
 
   return (
-    <Layout>
-      <Title title={"Admin Panel"} />
-      <AdminPanelNav>
-        <Row>
-          <Col sm={2} />
-          <Col sm={5}>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group>
-                <Form.Control
-                  onChange={handleChange}
-                  name="name"
-                  type="text"
-                  placeholder="Option Name"
-                  value={values.name}
-                />
-              </Form.Group>
-              <Button type="submit">Add</Button>
-            </Form>
-            <br />
-            <OptionsList options={options} />
-          </Col>
-        </Row>
-      </AdminPanelNav>
-    </Layout>
+    <AdminLayout>
+      <Row>
+        <Col sm={2} />
+        <Col sm={5}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Control
+                onChange={handleChange}
+                name="name"
+                type="text"
+                placeholder="Option Name"
+                value={values.name}
+              />
+            </Form.Group>
+            <Button type="submit">Add</Button>
+          </Form>
+          <br />
+          <OptionsList options={options} />
+        </Col>
+      </Row>
+    </AdminLayout>
   );
 };
 
