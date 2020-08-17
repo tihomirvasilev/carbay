@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import firebase, { FirebaseContext } from "./firebase";
-import useAuth from "./utils/auth";
 import HomePage from "./pages/home";
 import LoginPage from "./pages/login";
 import RegisterPage from "./pages/register";
@@ -14,13 +12,12 @@ import OptionsAdminPage from "./pages/admin-options";
 import NewAd from "./pages/new-ad";
 import AdDetailsPage from "./pages/ad-details";
 import FavoritesPage from "./pages/favorites";
+import AuthProvider from "./utils/auth";
 
 const Navigation = () => {
-  const user = useAuth();
-
   return (
-    <BrowserRouter>
-      <FirebaseContext.Provider value={{ user, firebase }}>
+    <AuthProvider>
+      <BrowserRouter>
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/login" component={LoginPage} />
@@ -36,8 +33,8 @@ const Navigation = () => {
           <Route path="/ad/:id" component={AdDetailsPage} />
           <Route path="/favorites" component={FavoritesPage} />
         </Switch>
-      </FirebaseContext.Provider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 

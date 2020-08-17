@@ -5,9 +5,11 @@
 }
 
 .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
   font-size: large;
   margin-left: auto;
-  text-align: center;
 }
 
 .nav-item {

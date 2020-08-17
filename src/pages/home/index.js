@@ -1,12 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 
-import { Container } from "react-bootstrap";
+import { FirebaseContext } from "../../firebase";
 import Layout from "../../components/layout";
 import AdsList from "../../components/ads-list";
-import { FirebaseContext } from "../../firebase";
-import styles from "./index.module.css";
 
-const HomePage = () => {
+const HomePage = (props) => {
   const { firebase } = useContext(FirebaseContext);
   const [ads, setAds] = useState([]);
 
@@ -16,9 +14,7 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <Container className={styles.body}>
-        <AdsList ads={ads} />
-      </Container>
+      <AdsList ads={ads} />
     </Layout>
   );
 };

@@ -1,25 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
+
+import { FirebaseContext } from "../../firebase";
 import Layout from "../../components/layout";
 import AdsList from "../../components/ads-list";
-import { FirebaseContext } from "../../firebase";
-import styles from "./index.module.css";
 
 const MyAdsPage = () => {
-  const { firebase } = useContext(FirebaseContext);
+  const { firebase, currentUser } = useContext(FirebaseContext);
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
-    firebase.getCollectionDocs("ads", setAds);
-  }, [firebase]);
+    firebase.getMyAds(currentUser, setAds);
+  }, [currentUser, firebase]);
 
-  return (
-    <Layout>
-      <Container className={styles.body}>
-        <AdsList ads={ads} />
-      </Container>
-    </Layout>
-  );
+  return <Layout>{currentUser && <AdsList ads={ads} />}</Layout>;
 };
 
-export default MyAdsPage;
+export default withRouter(MyAdsPage);

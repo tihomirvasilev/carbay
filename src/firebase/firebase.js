@@ -69,6 +69,15 @@ class Firebase {
     setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   }
 
+  async getMyAds(user, setState) {
+    const data = await this.db
+      .collection("ads")
+      .where("creatorId", "==", user.uid)
+      .get();
+
+    setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  }
+
   async getCollectionSnapshotDocs(collection, setState) {
     firebase.db
       .collection(collection)
