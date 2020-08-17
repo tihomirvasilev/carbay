@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import FirebaseContext from "../../firebase/context";
 import validateOption from "../../pages/admin-options/validateOption";
@@ -43,25 +43,20 @@ const OptionsPage = (props) => {
 
   return (
     <AdminLayout>
-      <Row>
-        <Col sm={2} />
-        <Col sm={5}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Control
-                onChange={handleChange}
-                name="name"
-                type="text"
-                placeholder="Option Name"
-                value={values.name}
-              />
-            </Form.Group>
-            <Button type="submit">Add</Button>
-          </Form>
-          <br />
-          <OptionsList options={options} />
-        </Col>
-      </Row>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Control
+            onChange={handleChange}
+            name="name"
+            type="text"
+            placeholder="Option Name"
+            value={values.name}
+          />
+        </Form.Group>
+        <Button type="submit">Add</Button>
+      </Form>
+      <br />
+      <OptionsList options={options} />
     </AdminLayout>
   );
 };
