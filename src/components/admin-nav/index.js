@@ -31,11 +31,6 @@ const AdminNav = (props) => {
                   Ads
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item className={styles["nav-item"]}>
-                <Nav.Link href="/admin/users" className={styles["nav-link"]}>
-                  Users
-                </Nav.Link>
-              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>
