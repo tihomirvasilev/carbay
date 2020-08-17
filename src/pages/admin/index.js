@@ -1,14 +1,9 @@
 import React from "react";
-import { Jumbotron } from "react-bootstrap";
 
 import AdminLayout from "../../components/admin-layout";
 
 const AdminPage = () => {
-  return (
-    <AdminLayout>
-      <Jumbotron>Hello, Administrator!</Jumbotron>
-    </AdminLayout>
-  );
+  return <AdminLayout></AdminLayout>;
 };
 
 export default AdminPage;

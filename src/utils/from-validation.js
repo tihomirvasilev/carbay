@@ -1,6 +1,6 @@
 import React from "react";
 
-function FormValidation(initialState, validate, handleFunction) {
+function FormValidation(initialState, validate, callback) {
   const [values, setValues] = React.useState(initialState);
   const [errors, setErrors] = React.useState({});
 
@@ -21,7 +21,7 @@ function FormValidation(initialState, validate, handleFunction) {
     event.preventDefault();
     const validationErrors = validate(values);
     setErrors(validationErrors);
-    handleFunction();
+    callback();
     setValues(initialState);
   }
 
