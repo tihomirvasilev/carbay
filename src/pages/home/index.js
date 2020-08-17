@@ -5,14 +5,12 @@ import Layout from "../../components/layout";
 import AdsList from "../../components/ads-list";
 
 const HomePage = () => {
-  const { firebase, currentUser } = useContext(FirebaseContext);
+  const { firebase } = useContext(FirebaseContext);
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
     firebase.getCollectionDocs("ads", setAds);
   }, [firebase]);
-
-  const handleFavorite = () => {};
 
   return (
     <Layout>
