@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Container, Carousel } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
 import { Row, Col } from "react-bootstrap";
 
@@ -18,7 +18,7 @@ const INITIAL_STATE = {
 };
 const AdDetailsPage = (props) => {
   const { id } = props.match.params;
-  const { firebase, user } = useContext(FirebaseContext);
+  const { firebase } = useContext(FirebaseContext);
 
   const [ad, setAd] = useState(INITIAL_STATE);
 
@@ -34,32 +34,26 @@ const AdDetailsPage = (props) => {
 
   return (
     <Layout>
-      <Container className={styles.body}>
-        <Row lg={12}>
-          <Col lg={6}>
-            <div>
-              {ad.brand} {ad.model} {ad.modification}
-              <br />
-              {ad.category}
-            </div>
-            <div>{ad.milage} км.</div>
-            <div>{ad.description}</div>
-          </Col>
-          <Col className={styles.image} lg={6}>
-            <Carousel
-              interval={null}
-              activeIndex={index}
-              onSelect={handleSelect}
-            >
-              {ad.imageUrls.map((image, index) => (
-                <Carousel.Item key={index}>
-                  <img className="d-block w-100" src={image} alt="" />
-                </Carousel.Item>
-              ))}
-            </Carousel>
-          </Col>
-        </Row>
-      </Container>
+      <Row lg={12}>
+        <Col lg={6}>
+          <div>
+            {ad.brand} {ad.model} {ad.modification}
+            <br />
+            {ad.category}
+          </div>
+          <div>{ad.milage} км.</div>
+          <div>{ad.description}</div>
+        </Col>
+        <Col className={styles.image} lg={6}>
+          <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
+            {ad.imageUrls.map((image, index) => (
+              <Carousel.Item key={index}>
+                <img className="d-block w-100" src={image} alt="" />
+              </Carousel.Item>
+            ))}
+          </Carousel>
+        </Col>
+      </Row>
     </Layout>
   );
 };

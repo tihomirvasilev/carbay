@@ -1,22 +1,31 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import FirebaseContext from "../firebase/context";
 import firebase from "../firebase";
 
-function useAuth() {
-  const [authUser, setAuthUser] = useState(null);
+const AuthProvider = (props) => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [pending, setPending] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = firebase.auth.onAuthStateChanged((user) => {
-      if (user) {
-        setAuthUser(user);
-      } else {
-        setAuthUser(null);
-      }
+    firebase.auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setPending(false);
     });
-
-    return () => unsubscribe();
   }, []);
 
-  return authUser;
-}
+  if (pending) {
+    return <>Loading..</>;
+  }
+  return (
+    <FirebaseContext.Provider
+      value={{
+        currentUser,
+        firebase,
+      }}
+    >
+      {props.children}
+    </FirebaseContext.Provider>
+  );
+};
 
-export default useAuth;
+export default AuthProvider;

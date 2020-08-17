@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
 import AdminPanelNav from "../../components/admin-nav";
 import Title from "../../components/title";
@@ -18,19 +18,17 @@ const BrandsAdmin = () => {
 
   return (
     <Layout>
-      <Container>
-        <Title title={"Admin Panel"} />
-        <AdminPanelNav>
-          <Row>
-            <Col sm={2} />
-            <Col sm={5}>
-              <BrandForm />
-              <br />
-              <BrandsList brands={brands} />
-            </Col>
-          </Row>
-        </AdminPanelNav>
-      </Container>
+      <Title title={"Admin Panel"} />
+      <AdminPanelNav>
+        <Row>
+          <Col sm={2} />
+          <Col sm={5}>
+            <BrandForm />
+            <br />
+            <BrandsList brands={brands} />
+          </Col>
+        </Row>
+      </AdminPanelNav>
     </Layout>
   );
 };

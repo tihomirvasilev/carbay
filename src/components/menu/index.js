@@ -5,8 +5,7 @@ import { FirebaseContext } from "../../firebase";
 import styles from "./index.module.css";
 
 const Menu = () => {
-  const { firebase, user } = useContext(FirebaseContext);
-
+  const { firebase, currentUser } = useContext(FirebaseContext);
   return (
     <Nav>
       <NavDropdown
@@ -17,7 +16,7 @@ const Menu = () => {
           />
         }
       >
-        {user && (
+        {currentUser && (
           <>
             <NavDropdown.Item href="/new-ad">New Add</NavDropdown.Item>
             <NavDropdown.Item href="/my-ads">My Ads</NavDropdown.Item>
@@ -30,7 +29,7 @@ const Menu = () => {
             </NavDropdown.Item>
           </>
         )}
-        {!user && (
+        {!currentUser && (
           <>
             <NavDropdown.Item href="/login">Login</NavDropdown.Item>
             <NavDropdown.Item href="/register">Register</NavDropdown.Item>
