@@ -10,7 +10,6 @@ function FormValidation(initialState, validate, handleFunction) {
       ...previousValues,
       [event.target.name]: event.target.value,
     }));
-    console.log(values);
   }
 
   function handleBlur() {

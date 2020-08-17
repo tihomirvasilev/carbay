@@ -4,6 +4,7 @@ import { Button, Form } from "react-bootstrap";
 import FirebaseContext from "../../firebase/context";
 import validateOption from "./validateOption";
 import FormValidation from "../../utils/from-validation";
+import Input from "../input";
 
 const INITIAL_STATE = {
   name: "",
@@ -34,15 +35,13 @@ const OptionForm = (props) => {
   }
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group>
-        <Form.Control
-          onChange={handleChange}
-          name="name"
-          type="text"
-          placeholder="Option Name"
-          value={values.name}
-        />
-      </Form.Group>
+      <Input
+        onChange={handleChange}
+        name="name"
+        placeHolder="Option Name"
+        value={values.name}
+        errors={errors}
+      />
       <Button type="submit">Add</Button>
     </Form>
   );

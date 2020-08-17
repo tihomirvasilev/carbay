@@ -326,18 +326,3 @@ const CreateAdPage = (props) => {
 };
 
 export default withRouter(CreateAdPage);
-
-// import React from "react";
-
-// import { Container } from "react-bootstrap";
-// import Layout from "../../components/layout";
-// import AdForm from "../../components/ad-form";
-// import styles from "./index.module.css";
-
-// const NewAdPage = () => {
-//   return (
-
-//   );
-// };
-
-// export default NewAdPage;
