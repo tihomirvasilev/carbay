@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   name: "",
 };
 
-const ModelsAdmin = (params) => {
+const ModelsAdmin = ({ history }) => {
   const { firebase } = useContext(FirebaseContext);
 
   const { handleSubmit, handleChange, values, errors } = FormValidation(
@@ -37,6 +37,8 @@ const ModelsAdmin = (params) => {
     await brandRef.update({
       models: fire.firestore.FieldValue.arrayUnion(values.name),
     });
+    setModels([]);
+    history.push("/admin/models");
   }
 
   function handleChangeOption(e) {

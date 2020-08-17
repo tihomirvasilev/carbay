@@ -12,8 +12,8 @@ const INITIAL_STATE = {
   name: "",
 };
 
-const OptionsPage = (props) => {
-  const { firebase, user } = useContext(FirebaseContext);
+const OptionsPage = ({ history }) => {
+  const { firebase, currentUser } = useContext(FirebaseContext);
   const { handleSubmit, handleChange, values, errors } = FormValidation(
     INITIAL_STATE,
     validateOption,
@@ -27,8 +27,8 @@ const OptionsPage = (props) => {
 
   function handleCreateOption() {
     const hasErrors = Object.keys(errors).length > 0;
-    if (!user) {
-      props.history.push("/login");
+    if (!currentUser) {
+      history.push("/login");
     } else {
       if (!hasErrors) {
         const { name } = values;
@@ -36,7 +36,7 @@ const OptionsPage = (props) => {
           name,
         };
         firebase.db.collection("options").add(newOption);
-        props.history.push("/admin/options");
+        history.push("/admin/options");
       }
     }
   }

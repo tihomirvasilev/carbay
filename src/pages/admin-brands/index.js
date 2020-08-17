@@ -1,26 +1,64 @@
 import React, { useContext, useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
+import FirebaseContext from "../../firebase/context";
 
-import { FirebaseContext } from "../../firebase";
-import BrandForm from "../../components/brand-form";
+import Input from "../../components/input";
 import BrandsList from "../../components/brands-list";
 import AdminLayout from "../../components/admin-layout";
+import FormValidation from "../../utils/from-validation";
+import validateBrand from "./validateBrand";
 
-const BrandsAdmin = () => {
-  const { firebase } = useContext(FirebaseContext);
+const INITIAL_STATE = {
+  name: "",
+};
+
+const BrandsAdmin = ({ history }) => {
+  const { firebase, currentUser } = useContext(FirebaseContext);
 
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
     firebase.getCollectionSnapshotDocs("brands", setBrands);
   }, [firebase]);
+  const { handleSubmit, handleChange, values, errors } = FormValidation(
+    INITIAL_STATE,
+    validateBrand,
+    createBrand
+  );
+
+  function createBrand() {
+    const hasErrors = Object.keys(errors).length > 0;
+    if (!currentUser) {
+      history.push("/login");
+    } else {
+      if (!hasErrors) {
+        const { name } = values;
+        const newBrand = {
+          name,
+          models: [],
+        };
+
+        firebase.db.collection("brands").add(newBrand);
+      }
+    }
+  }
 
   return (
     <AdminLayout>
-      <BrandForm />
-      <br />
+      <Form onSubmit={handleSubmit}>
+        <Input
+          name="name"
+          placeHolder="Enter Brand"
+          value={values.name}
+          onChange={handleChange}
+          errors={errors}
+        />
+        <Button type="submit">Add</Button>
+      </Form>
       <BrandsList brands={brands} />
     </AdminLayout>
   );
 };
 
-export default BrandsAdmin;
+export default withRouter(BrandsAdmin);
