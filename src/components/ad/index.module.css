@@ -47,19 +47,3 @@
 .ad-wrapper {
   margin: 10px;
 }
-
-.fav-orange {
-  color: orangered;
-}
-
-.fav-orange :hover {
-  color: black;
-}
-
-.fav-black {
-  color: black;
-}
-
-.fav-black :hover {
-  color: orangered;
-}

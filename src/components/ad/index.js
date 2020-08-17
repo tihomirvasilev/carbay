@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
-import { BsHeartFill } from "react-icons/bs";
+import FavoriteButton from "../favorite-button";
 import DateFormat from "../../utils/date";
 import styles from "./index.module.css";
 
@@ -51,12 +51,7 @@ const Ad = ({
           <div className={styles["bold-md"]}>{city}</div>
         </Col>
         <Col lg={1}>
-          <div>
-            <BsHeartFill className={styles["fav-orange"]} />
-          </div>
-          <div>
-            <BsHeartFill className={styles["fav-black"]} />
-          </div>
+          <FavoriteButton />
         </Col>
       </Row>
     </Container>

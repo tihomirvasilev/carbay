@@ -30,10 +30,12 @@ const Header = () => {
             </Nav.Link>
             {currentUser && (
               <>
-                <Nav.Link href="/admin" className={styles["nav-item"]}>
-                  <BsWrench className={styles["icon-item"]} />
-                  Admin Panel
-                </Nav.Link>
+                {currentUser.isAdmin && (
+                  <Nav.Link href="/admin" className={styles["nav-item"]}>
+                    <BsWrench className={styles["icon-item"]} />
+                    Admin Panel
+                  </Nav.Link>
+                )}
                 <Nav.Link href="/my-ads" className={styles["nav-item"]}>
                   <BsClipboard className={styles["icon-item"]} />
                   My Ads

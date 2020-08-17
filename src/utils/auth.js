@@ -7,8 +7,17 @@ const AuthProvider = (props) => {
   const [pending, setPending] = useState(true);
 
   useEffect(() => {
-    firebase.auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+    firebase.auth.onAuthStateChanged(async (authUser) => {
+      if (authUser) {
+        const userDb = await firebase.getUserById(authUser.uid);
+
+        authUser = {
+          isAdmin: userDb.roles === "admin" ? true : false,
+          favorites: userDb.favorites,
+          ...authUser,
+        };
+      }
+      setCurrentUser(authUser);
       setPending(false);
     });
   }, []);
