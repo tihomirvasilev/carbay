@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Row, Col } from "react-bootstrap";
+
 import { FirebaseContext } from "../../firebase";
 import BrandForm from "../../components/brand-form";
 import BrandsList from "../../components/brands-list";
@@ -16,14 +16,9 @@ const BrandsAdmin = () => {
 
   return (
     <AdminLayout>
-      <Row>
-        <Col sm={2} />
-        <Col sm={5}>
-          <BrandForm />
-          <br />
-          <BrandsList brands={brands} />
-        </Col>
-      </Row>
+      <BrandForm />
+      <br />
+      <BrandsList brands={brands} />
     </AdminLayout>
   );
 };
