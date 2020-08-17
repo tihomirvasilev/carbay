@@ -6,6 +6,7 @@ import { FirebaseContext } from "../../firebase";
 import validateLogin from "./validation";
 import styles from "./index.module.css";
 import Layout from "../../components/layout";
+import Input from "../../components/input";
 
 const INITIAL_STATE = {
   email: "",
@@ -14,11 +15,13 @@ const INITIAL_STATE = {
 
 const LoginPage = (props) => {
   const { firebase } = useContext(FirebaseContext);
-  const { handleSubmit, handleChange, values } = FormValidation(
-    INITIAL_STATE,
-    validateLogin,
-    handleLogin
-  );
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+  } = FormValidation(INITIAL_STATE, validateLogin, handleLogin);
 
   const [firebaseError, setFirebaseError] = useState(null);
 
@@ -38,26 +41,26 @@ const LoginPage = (props) => {
       <Row>
         <Col md={{ span: 4, offset: 4 }}>
           <Form className={styles.form} onSubmit={handleSubmit}>
-            <Form.Group controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                onChange={handleChange}
-                name="email"
-                type="email"
-                placeholder="Enter email"
-                value={values.email}
-              />
-            </Form.Group>
-            <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                onChange={handleChange}
-                name="password"
-                type="password"
-                placeholder="Password"
-                value={values.password}
-              />
-            </Form.Group>
+            <Input
+              label="Email Address"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="email"
+              type="email"
+              placeHolder="Enter Email"
+              value={values.email}
+              errors={errors}
+            />
+            <Input
+              label="Password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              name="password"
+              type="password"
+              placeHolder="Enter Password"
+              value={values.password}
+              errors={errors}
+            />
             <div className={styles["button-container"]}>
               <Button className={styles.button} type="submit">
                 Login

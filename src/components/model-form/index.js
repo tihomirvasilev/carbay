@@ -4,7 +4,8 @@ import { Button, Form } from "react-bootstrap";
 import FirebaseContext from "../../firebase/context";
 import FormValidation from "../../utils/from-validation";
 import ValidateModel from "./validation";
-import ModelsList from "../models-list";
+import Input from "../input";
+import ModelList from "../models-list";
 
 const INITIAL_STATE = {
   brand: "",
@@ -14,7 +15,7 @@ const INITIAL_STATE = {
 const ModelForm = () => {
   const { firebase } = useContext(FirebaseContext);
 
-  const { handleSubmit, handleChange, values } = FormValidation(
+  const { handleSubmit, handleChange, values, errors } = FormValidation(
     INITIAL_STATE,
     ValidateModel,
     AddModel
@@ -45,34 +46,31 @@ const ModelForm = () => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="exampleForm.ControlSelect1">
-          <Form.Control
-            as="select"
-            name="brand"
-            onChange={handleChangeOption}
-            value={values.brand}
-          >
-            <option value="">SELECT BRAND</option>
-            {brands.map((b, index) => (
-              <option key={index} value={JSON.stringify(b)}>
-                {b.name}
-              </option>
-            ))}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Control
-            onChange={handleChange}
-            name="name"
-            type="text"
-            placeholder="Model Name"
-            value={values.name}
-          />
-        </Form.Group>
+        <Input
+          as="select"
+          name="brand"
+          onChange={handleChangeOption}
+          value={values.brand}
+          errors={errors}
+        >
+          <option value="">SELECT BRAND</option>
+          {brands.map((b, index) => (
+            <option key={index} value={JSON.stringify(b)}>
+              {b.name}
+            </option>
+          ))}
+        </Input>
+        <Input
+          name="name"
+          onChange={handleChange}
+          placeHolder="Enter Model"
+          value={values.name}
+          errors={errors}
+        />
         <Button type="submit">Add</Button>
       </Form>
       <br />
-      <ModelsList models={models} />
+      <ModelList models={models} />
     </>
   );
 };
