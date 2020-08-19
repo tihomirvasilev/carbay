@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import Layout from "../../components/layout";
-import AdsList from "../../components/ads-list";
+import Ad from "../../components/ad";
 import { FirebaseContext } from "../../firebase";
 
 const FavoritesPage = () => {
@@ -13,7 +13,9 @@ const FavoritesPage = () => {
 
   return (
     <Layout>
-      <AdsList ads={ads} />
+      {ads.map((ad, index) => (
+        <Ad key={index} {...ad} />
+      ))}
     </Layout>
   );
 };

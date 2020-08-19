@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
+import GC from "../../constants";
 import FirebaseContext from "../../firebase/context";
 import validateOption from "../../pages/admin-options/validateOption";
 import FormValidation from "../../utils/from-validation";
@@ -28,7 +29,7 @@ const OptionsPage = ({ history }) => {
   function handleCreateOption() {
     const hasErrors = Object.keys(errors).length > 0;
     if (!currentUser) {
-      history.push("/login");
+      history.push(GC.ROUTES.USER.LOGIN);
     } else {
       if (!hasErrors) {
         const { name } = values;
@@ -36,7 +37,7 @@ const OptionsPage = ({ history }) => {
           name,
         };
         firebase.db.collection("options").add(newOption);
-        history.push("/admin/options");
+        history.push(GC.ROUTES.ADMIN.OPTIONS);
       }
     }
   }

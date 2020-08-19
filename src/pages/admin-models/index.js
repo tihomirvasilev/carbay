@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import * as fire from "firebase/app";
 import { Button, Form } from "react-bootstrap";
 
+import GC from "../../constants";
 import FirebaseContext from "../../firebase/context";
 import FormValidation from "../../utils/from-validation";
 import ValidateModel from "./validation";
@@ -38,7 +39,7 @@ const ModelsAdmin = ({ history }) => {
       models: fire.firestore.FieldValue.arrayUnion(values.name),
     });
     setModels([]);
-    history.push("/admin/models");
+    history.push(GC.ROUTES.ADMIN.MODELS);
   }
 
   function handleChangeOption(e) {
