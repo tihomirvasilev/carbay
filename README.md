@@ -20,17 +20,17 @@
  - Ad details page
 
 ## Private Part (Logged in users only)
- - New Ad page - he can create a new ad
- - My Ads page - he can view his ads
- - Edit Ad page - he can edit his ads
+ - New Ad page - can create a new ad
+ - My Ads page - can view his ads
+ - Edit Ad page - can edit his ads
  - Can add ads to favorites
  
 
 ## Admin Part (Admin users only)
- - New Brand - he can create a new Brand
- - New Model - he can create a new Model
- - New Options - he can create new Option
- - Delete Ads - he can delete any ads
+ - New Brand - can create a new Brand
+ - New Model - can create a new Model
+ - New Options - can create new Option
+ - Delete Ads - can delete any ads
 
 ## How to run this project
  - create .env file inside your src folder, then edit the file using your Firebase application credentials in this format:
