@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
+import { BsFillXOctagonFill, BsFillXDiamondFill } from "react-icons/bs";
 import FavoriteButton from "../favorite-button";
 import DateFormat from "../../utils/date";
+import { FirebaseContext } from "../../firebase";
 import styles from "./index.module.css";
 
 const Ad = ({
@@ -16,6 +18,8 @@ const Ad = ({
   firstRegistration,
   price,
   city,
+  isCreator = false,
+  handleDelete,
 }) => {
   return (
     <Container fluid>
@@ -50,8 +54,24 @@ const Ad = ({
         <Col lg={1}>
           <div className={styles["bold-md"]}>{city}</div>
         </Col>
-        <Col lg={1}>
-          <FavoriteButton />
+        <Col lg={2}>
+          {isCreator && (
+            <>
+              <div>
+                <Link>
+                  <BsFillXDiamondFill className={styles.button} />
+                  <span className={styles["button-name"]}>Edit</span>
+                </Link>
+              </div>
+              <div>
+                <Link onClick={() => handleDelete(id)}>
+                  <BsFillXOctagonFill className={styles.button} />
+                  <span className={styles["button-name"]}>Remove</span>
+                </Link>
+              </div>
+            </>
+          )}
+          {!isCreator && <FavoriteButton />}
         </Col>
       </Row>
     </Container>

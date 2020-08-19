@@ -24,6 +24,7 @@ class Firebase {
         this.db.collection("users").add({
           uid: res.user.uid,
           roles: "user",
+          phone: phone,
           favorites: [],
         });
 
@@ -77,12 +78,18 @@ class Firebase {
   }
 
   async getMyAds(user, setState) {
-    const data = await this.db
-      .collection("ads")
-      .where("creatorId", "==", user.uid)
-      .get();
+    if (user) {
+      const data = await this.db
+        .collection("ads")
+        .where("creatorId", "==", user.uid)
+        .get();
 
-    setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+  }
+
+  async deleteAd(id) {
+    await this.db.collection("ads").doc(id).delete();
   }
 
   async getCollectionSnapshotDocs(collection, setState) {

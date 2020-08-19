@@ -32,6 +32,7 @@ const Navigation = () => {
           <Route path="/admin/ads" component={AdminPage} />
           <Route path="/ad/:id" component={AdDetailsPage} />
           <Route path="/favorites" component={FavoritesPage} />
+          <Route path="/delete/:id" component={MyAdsPage} />
         </Switch>
       </BrowserRouter>
     </AuthProvider>
