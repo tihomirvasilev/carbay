@@ -17,19 +17,18 @@ const AuthProvider = (props) => {
           ...authUser,
         };
       }
+
       setCurrentUser(authUser);
       setPending(false);
     });
   }, []);
 
-  if (pending) {
-    return <>Loading..</>;
-  }
   return (
     <FirebaseContext.Provider
       value={{
         currentUser,
         firebase,
+        pending,
       }}
     >
       {props.children}
