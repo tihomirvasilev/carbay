@@ -63,3 +63,7 @@
 .link :hover {
   text-decoration: none;
 }
+.hr {
+  margin: 0px;
+  padding: 5px;
+}

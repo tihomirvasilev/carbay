@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
-import FirebaseContext from "../../firebase/context";
 
+import FirebaseContext from "../../firebase/context";
+import GC from "../../constants";
 import Input from "../../components/input";
 import BrandsList from "../../components/brands-list";
 import AdminLayout from "../../components/admin-layout";
@@ -30,7 +31,7 @@ const BrandsAdmin = ({ history }) => {
   function createBrand() {
     const hasErrors = Object.keys(errors).length > 0;
     if (!currentUser) {
-      history.push("/login");
+      history.push(GC.ROUTES.USER.LOGIN);
     } else {
       if (!hasErrors) {
         const { name } = values;

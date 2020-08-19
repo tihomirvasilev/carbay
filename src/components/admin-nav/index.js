@@ -1,7 +1,7 @@
 import React from "react";
-
 import { Tab, Row, Col, Nav, Container } from "react-bootstrap";
 
+import GC from "../../constants";
 import styles from "./index.module.css";
 
 const AdminNav = (props) => {
@@ -12,22 +12,34 @@ const AdminNav = (props) => {
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item className={styles["nav-item"]}>
-                <Nav.Link href="/admin/brands" className={styles["nav-link"]}>
+                <Nav.Link
+                  href={GC.ROUTES.ADMIN.BRANDS}
+                  className={styles["nav-link"]}
+                >
                   Brands
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item className={styles["nav-item"]}>
-                <Nav.Link href="/admin/models" className={styles["nav-link"]}>
+                <Nav.Link
+                  href={GC.ROUTES.ADMIN.MODELS}
+                  className={styles["nav-link"]}
+                >
                   Models
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item className={styles["nav-item"]}>
-                <Nav.Link href="/admin/options" className={styles["nav-link"]}>
+                <Nav.Link
+                  href={GC.ROUTES.ADMIN.OPTIONS}
+                  className={styles["nav-link"]}
+                >
                   Options
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item className={styles["nav-item"]}>
-                <Nav.Link href="/admin/ads" className={styles["nav-link"]}>
+                <Nav.Link
+                  href={GC.ROUTES.ADMIN.ADS}
+                  className={styles["nav-link"]}
+                >
                   Ads
                 </Nav.Link>
               </Nav.Item>

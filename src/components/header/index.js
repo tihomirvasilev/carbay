@@ -7,6 +7,7 @@ import {
   BsWrench,
 } from "react-icons/bs";
 
+import GC from "../../constants";
 import { FirebaseContext } from "../../firebase";
 import Menu from "../menu";
 
@@ -31,16 +32,25 @@ const Header = () => {
             {currentUser && (
               <>
                 {currentUser.isAdmin && (
-                  <Nav.Link href="/admin" className={styles["nav-item"]}>
+                  <Nav.Link
+                    href={GC.ROUTES.ADMIN.PANEL}
+                    className={styles["nav-item"]}
+                  >
                     <BsWrench className={styles["icon-item"]} />
                     Admin Panel
                   </Nav.Link>
                 )}
-                <Nav.Link href="/my-ads" className={styles["nav-item"]}>
+                <Nav.Link
+                  href={GC.ROUTES.USER.MYADS}
+                  className={styles["nav-item"]}
+                >
                   <BsClipboard className={styles["icon-item"]} />
                   My Ads
                 </Nav.Link>
-                <Nav.Link href="/favorites" className={styles["nav-item"]}>
+                <Nav.Link
+                  href={GC.ROUTES.USER.FAVORITES}
+                  className={styles["nav-item"]}
+                >
                   <BsBookmarkCheck className={styles["icon-item"]} />
                   Favorites
                 </Nav.Link>

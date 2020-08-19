@@ -1,10 +1,9 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
 import { BsFillXOctagonFill, BsFillXDiamondFill } from "react-icons/bs";
 import FavoriteButton from "../favorite-button";
 import DateFormat from "../../utils/date";
-import { FirebaseContext } from "../../firebase";
 import styles from "./index.module.css";
 
 const Ad = ({
@@ -58,7 +57,7 @@ const Ad = ({
           {isCreator && (
             <>
               <div>
-                <Link>
+                <Link to={`/edit/${id}`}>
                   <BsFillXDiamondFill className={styles.button} />
                   <span className={styles["button-name"]}>Edit</span>
                 </Link>
@@ -74,6 +73,7 @@ const Ad = ({
           {!isCreator && <FavoriteButton />}
         </Col>
       </Row>
+      <hr className={styles.hr} />
     </Container>
   );
 };

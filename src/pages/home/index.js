@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 
 import { FirebaseContext } from "../../firebase";
 import Layout from "../../components/layout";
-import AdsList from "../../components/ads-list";
+import Ad from "../../components/ad";
 
 const HomePage = () => {
   const { firebase } = useContext(FirebaseContext);
@@ -14,7 +14,9 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <AdsList ads={ads} />
+      {ads.map((ad, index) => (
+        <Ad key={index} {...ad} />
+      ))}
     </Layout>
   );
 };

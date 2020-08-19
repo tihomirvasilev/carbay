@@ -6,7 +6,7 @@ import Layout from "../../components/layout";
 import Ad from "../../components/ad";
 
 const MyAdsPage = () => {
-  const { firebase, currentUser, isPending } = useContext(FirebaseContext);
+  const { firebase, currentUser } = useContext(FirebaseContext);
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
