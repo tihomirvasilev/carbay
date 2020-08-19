@@ -8,6 +8,7 @@ import validateOption from "../../pages/admin-options/validateOption";
 import FormValidation from "../../utils/from-validation";
 import OptionsList from "../../components/options-list";
 import AdminLayout from "../../components/admin-layout";
+import Input from "../../components/input";
 
 const INITIAL_STATE = {
   name: "",
@@ -45,15 +46,13 @@ const OptionsPage = ({ history }) => {
   return (
     <AdminLayout>
       <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Control
-            onChange={handleChange}
-            name="name"
-            type="text"
-            placeholder="Option Name"
-            value={values.name}
-          />
-        </Form.Group>
+        <Input
+          name="name"
+          onChange={handleChange}
+          placeHolder="Option Name"
+          value={values.name}
+          errors={errors}
+        />
         <Button type="submit">Add</Button>
       </Form>
       <br />

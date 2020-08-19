@@ -61,6 +61,7 @@ const LoginPage = (props) => {
               value={values.password}
               errors={errors}
             />
+            {firebaseError && <span>{{ firebaseError }}</span>}
             <div className={styles["button-container"]}>
               <Button className={styles.button} type="submit">
                 Login
