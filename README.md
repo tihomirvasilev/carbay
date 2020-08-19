@@ -43,5 +43,7 @@ REACT_APP_MESSAGING_SENDER_ID="
 REACT_APP_APP_ID=""
 REACT_APP_MEASUREMENT_ID=""
 </code></pre>
- - run <pre><code>yarn install</code></pre>
- - run <pre><code>yarn start</code></pre>
+ - run
+ <pre><code>yarn install</code></pre>
+ - run 
+ <pre><code>yarn start</code></pre>
