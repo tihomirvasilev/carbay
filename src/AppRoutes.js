@@ -15,6 +15,7 @@ const EditAd = React.lazy(() => import("./pages/edit-ad"));
 const AdDetailsPage = React.lazy(() => import("./pages/ad-details"));
 const FavoritesPage = React.lazy(() => import("./pages/favorites"));
 const SearchPage = React.lazy(() => import("./pages/search"));
+
 const AppRouter = () => {
   const user = JSON.parse(localStorage.getItem("authUser"));
 

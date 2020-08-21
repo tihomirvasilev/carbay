@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
+import Loader from "./components/spinner";
 import Layout from "./components/layout";
 import AuthProvider from "./utils/auth";
 import AppRoutes from "./AppRoutes";
@@ -9,7 +10,7 @@ const App = () => {
     <BrowserRouter>
       <AuthProvider>
         <Layout>
-          <React.Suspense fallback={<h1>Loading....</h1>}>
+          <React.Suspense fallback={<Loader />}>
             <AppRoutes />
           </React.Suspense>
         </Layout>

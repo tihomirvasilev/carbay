@@ -4,7 +4,6 @@ import { Carousel } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
 import { Row, Col } from "react-bootstrap";
 
-import Layout from "../../components/layout";
 import styles from "./index.module.css";
 
 const INITIAL_STATE = {

@@ -6,8 +6,6 @@ import { FirebaseContext } from "../../firebase";
 import FormValidation from "../../utils/from-validation";
 import validateRegister from "./validation";
 import Input from "../../components/input";
-import Layout from "../../components/layout";
-
 import styles from "./index.module.css";
 
 const INITIAL_STATE = {
