@@ -24,27 +24,27 @@ const Menu = () => {
         {currentUser && (
           <>
             <NavDropdown.Item href={GC.ROUTES.USER.NEWAD}>
-              New Add
+              Нова Обява
             </NavDropdown.Item>
             <NavDropdown.Item href={GC.ROUTES.USER.MYADS}>
-              My Ads
+              Моите Обяви
             </NavDropdown.Item>
             <NavDropdown.Item href={GC.ROUTES.USER.FAVORITES}>
-              Favorites
+              Бележник
             </NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={() => firebase.logout()} href="/">
-              Logout
+              Излизане
             </NavDropdown.Item>
           </>
         )}
         {!currentUser && (
           <>
             <NavDropdown.Item href={GC.ROUTES.USER.LOGIN}>
-              Login
+              Влизане
             </NavDropdown.Item>
             <NavDropdown.Item href={GC.ROUTES.USER.REGISTER}>
-              Register
+              Регистрация
             </NavDropdown.Item>
           </>
         )}

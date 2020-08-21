@@ -7,16 +7,15 @@ import Ad from "../../components/ad";
 const MyAdsPage = ({ history }) => {
   const { firebase } = useContext(FirebaseContext);
   const currentUser = JSON.parse(localStorage.getItem("authUser"));
-  const id = currentUser.uid;
+  const uid = currentUser.uid;
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
-    firebase.getMyAds(id, setAds);
-  }, [firebase, id]);
+    firebase.getMyAds(uid, setAds);
+  }, [firebase, uid, ads]);
 
   const handleDelete = async (id) => {
     await firebase.deleteAd(id);
-    history.push("/my-ads");
   };
 
   return (

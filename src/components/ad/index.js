@@ -63,7 +63,7 @@ const Ad = ({
                 </Link>
               </div>
               <div>
-                <Link onClick={() => handleDelete(id)}>
+                <Link to="/my-ads" onClick={() => handleDelete(id)}>
                   <BsFillXOctagonFill className={styles.button} />
                   <span className={styles["button-name"]}>Remove</span>
                 </Link>

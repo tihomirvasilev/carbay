@@ -105,12 +105,15 @@ class Firebase {
   }
 
   async getMyAds(id, setState) {
-    const data = await this.db
+    await this.db
       .collection("ads")
       .where("creatorId", "==", id)
-      .get();
-
-    setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      .onSnapshot((snapshot) => {
+        const docs = snapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+        setState(docs);
+      });
   }
 
   async deleteAd(id) {

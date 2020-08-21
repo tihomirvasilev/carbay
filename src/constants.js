@@ -9,6 +9,7 @@ const GC = {
       AD: "/ad/:id",
       FAVORITES: "/favorites",
       EDITAD: "/edit/:id",
+      SEARCH: "/search",
     },
     ADMIN: {
       PANEL: "/admin",
