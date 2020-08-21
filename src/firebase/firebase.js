@@ -54,7 +54,6 @@ class Firebase {
       .then(function (doc) {
         if (doc.exists) {
           setState(doc.data());
-          console.log("Document data:", doc.data());
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -64,6 +63,35 @@ class Firebase {
         console.log("Error getting document:", error);
       });
   }
+
+  async getEditAd(collection, id, setState, setPictures, setCurrentValues) {
+    const docRef = this.db.collection(collection).doc(id);
+
+    docRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          const data = doc.data();
+          setState(data);
+          setPictures(data.imageUrls);
+          setCurrentValues(data);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+  }
+
+  async updateDoc(collection, id, data) {
+    await this.db
+      .collection(collection)
+      .doc(id)
+      .update({ ...data });
+  }
+
   async getUserById(id) {
     const data = await this.db.collection("users").where("uid", "==", id).get();
 
