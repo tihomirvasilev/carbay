@@ -14,7 +14,7 @@ const NewAd = React.lazy(() => import("./pages/new-ad"));
 const EditAd = React.lazy(() => import("./pages/edit-ad"));
 const AdDetailsPage = React.lazy(() => import("./pages/ad-details"));
 const FavoritesPage = React.lazy(() => import("./pages/favorites"));
-
+const SearchPage = React.lazy(() => import("./pages/search"));
 const AppRouter = () => {
   const user = JSON.parse(localStorage.getItem("authUser"));
 
@@ -48,6 +48,7 @@ const AppRouter = () => {
       <AuthRoute path={GC.ROUTES.USER.LOGIN} component={LoginPage} />
       <AuthRoute path={GC.ROUTES.USER.REGISTER} component={RegisterPage} />
       <Route path={GC.ROUTES.USER.AD} component={AdDetailsPage} />
+      <Route path={GC.ROUTES.USER.SEARCH} component={SearchPage} />
       <PrivateRoute path={GC.ROUTES.USER.MYADS} component={MyAdsPage} />
       <PrivateRoute path="/ad/delete" component={MyAdsPage} />
       <PrivateRoute path={GC.ROUTES.USER.NEWAD} component={NewAd} />

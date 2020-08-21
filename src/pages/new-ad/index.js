@@ -5,6 +5,7 @@ import { Form, Col, Button, Row } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
 import FormValidation from "../../utils/from-validation";
 import validateAd from "./validateAd";
+import func from "../../utils/date";
 import styles from "./index.module.css";
 
 const INITIAL_STATE = {
@@ -44,17 +45,7 @@ const CreateAdPage = (props) => {
     firebase.getCollectionDocs("brands", setBrands);
     firebase.getCollectionDocs("options", setOptions);
 
-    function generateYearsTillNow() {
-      let years = [];
-      let date = new Date();
-      const lastYear = date.getFullYear();
-
-      for (let i = 1950; i <= lastYear; i++) {
-        years.push(i);
-      }
-      setYears(years);
-    }
-    generateYearsTillNow();
+    func.generateYearsTillNow(1970, setYears);
   }, [firebase]);
 
   function handleOptionCheckbox(e) {

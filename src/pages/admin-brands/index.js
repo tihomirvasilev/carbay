@@ -21,6 +21,7 @@ const BrandsAdmin = () => {
   useEffect(() => {
     firebase.getCollectionSnapshotDocs("brands", setBrands);
   }, [firebase]);
+
   const { handleSubmit, handleChange, values, errors } = FormValidation(
     INITIAL_STATE,
     validateBrand,

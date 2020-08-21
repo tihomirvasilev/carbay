@@ -26,7 +26,7 @@ const Header = () => {
           <Navbar.Collapse className={styles.navbar}>
             <Nav.Link href="/search" className={styles["nav-item"]}>
               <BsSearch className={styles["icon-item"]} />
-              Search
+              Търси
             </Nav.Link>
             {currentUser && (
               <>
@@ -36,7 +36,7 @@ const Header = () => {
                     className={styles["nav-item"]}
                   >
                     <BsWrench className={styles["icon-item"]} />
-                    Admin Panel
+                    Администраторски панел
                   </Nav.Link>
                 )}
                 <Nav.Link
@@ -44,14 +44,14 @@ const Header = () => {
                   className={styles["nav-item"]}
                 >
                   <BsClipboard className={styles["icon-item"]} />
-                  My Ads
+                  Моите обяви
                 </Nav.Link>
                 <Nav.Link
                   href={GC.ROUTES.USER.FAVORITES}
                   className={styles["nav-item"]}
                 >
                   <BsBookmarkCheck className={styles["icon-item"]} />
-                  Favorites
+                  Бележник
                 </Nav.Link>
               </>
             )}
