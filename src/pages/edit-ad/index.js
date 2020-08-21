@@ -99,7 +99,7 @@ const EditAdPage = (props) => {
   }
 
   return (
-    <Layout>
+    <>
       <Form onSubmit={handleSubmit}>
         <Form.Row>
           <Form.Group as={Col} sm={3} controlId="brand">
@@ -280,7 +280,7 @@ const EditAdPage = (props) => {
         </Form.Row>
         <Button type="submit">Update</Button>
       </Form>
-    </Layout>
+    </>
   );
 };
 

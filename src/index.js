@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Navigation from "./navigation";
+import App from "./App";
 
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-ReactDOM.render(<Navigation />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));

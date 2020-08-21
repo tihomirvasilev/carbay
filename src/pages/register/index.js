@@ -46,7 +46,7 @@ const RegisterPage = (props) => {
     }
   }
   return (
-    <Layout>
+    <>
       <Container>
         <Row>
           <Col md={{ span: 4, offset: 4 }}>
@@ -99,7 +99,7 @@ const RegisterPage = (props) => {
           </Col>
         </Row>
       </Container>
-    </Layout>
+    </>
   );
 };
 

@@ -55,7 +55,6 @@ class Firebase {
         if (doc.exists) {
           setState(doc.data());
         } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
         }
       })
@@ -105,15 +104,13 @@ class Firebase {
     setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   }
 
-  async getMyAds(user, setState) {
-    if (user) {
-      const data = await this.db
-        .collection("ads")
-        .where("creatorId", "==", user.uid)
-        .get();
+  async getMyAds(id, setState) {
+    const data = await this.db
+      .collection("ads")
+      .where("creatorId", "==", id)
+      .get();
 
-      setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }
+    setState(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   }
 
   async deleteAd(id) {

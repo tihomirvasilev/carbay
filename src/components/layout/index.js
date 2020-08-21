@@ -9,7 +9,6 @@ const Layout = (props) => {
   return (
     <>
       <Header />
-
       <Container className={styles.body}>
         <div>{props.children}</div>
       </Container>

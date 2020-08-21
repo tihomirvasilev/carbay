@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import {
   BsClipboard,
@@ -8,13 +8,12 @@ import {
 } from "react-icons/bs";
 
 import GC from "../../constants";
-import { FirebaseContext } from "../../firebase";
 import Menu from "../menu";
 
 import styles from "./index.module.css";
 
 const Header = () => {
-  const { currentUser } = useContext(FirebaseContext);
+  const currentUser = JSON.parse(localStorage.getItem("authUser"));
 
   return (
     <Container fluid className={styles.header}>

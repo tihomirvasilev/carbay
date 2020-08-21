@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from "react";
-import FirebaseContext from "../firebase/context";
-import firebase from "../firebase";
+import firebase, { FirebaseContext } from "../firebase";
 
 const AuthProvider = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [pending, setPending] = useState(true);
 
   useEffect(() => {
-    firebase.auth.onAuthStateChanged(async (authUser) => {
-      if (authUser) {
-        const userDb = await firebase.getUserById(authUser.uid);
+    firebase.auth.onAuthStateChanged(
+      async (authUser) => {
+        if (authUser) {
+          const userDb = await firebase.getUserById(authUser.uid);
 
-        authUser = {
-          isAdmin: userDb.roles === "admin" ? true : false,
-          favorites: userDb.favorites,
-          ...authUser,
-        };
+          authUser = {
+            uid: authUser.uid,
+            displayName: authUser.displayName,
+            isAdmin: userDb.roles === "admin" ? true : false,
+            favorites: userDb.favorites,
+          };
+        }
+        localStorage.setItem("authUser", JSON.stringify(authUser));
+        setCurrentUser(authUser);
+      },
+      () => {
+        localStorage.removeItem("authUser");
+        setCurrentUser(null);
       }
-
-      setCurrentUser(authUser);
-      setPending(false);
-    });
+    );
   }, []);
 
   return (
@@ -28,7 +32,6 @@ const AuthProvider = (props) => {
       value={{
         currentUser,
         firebase,
-        pending,
       }}
     >
       {props.children}
