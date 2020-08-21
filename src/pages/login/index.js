@@ -5,7 +5,6 @@ import FormValidation from "../../utils/from-validation";
 import { FirebaseContext } from "../../firebase";
 import validateLogin from "./validation";
 import styles from "./index.module.css";
-import Layout from "../../components/layout";
 import Input from "../../components/input";
 
 const INITIAL_STATE = {
@@ -37,7 +36,7 @@ const LoginPage = (props) => {
   }
 
   return (
-    <Layout>
+    <>
       <Row>
         <Col md={{ span: 4, offset: 4 }}>
           <Form className={styles.form} onSubmit={handleSubmit}>
@@ -70,7 +69,7 @@ const LoginPage = (props) => {
           </Form>
         </Col>
       </Row>
-    </Layout>
+    </>
   );
 };
 

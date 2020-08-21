@@ -8,7 +8,9 @@ import { FirebaseContext } from "../../firebase";
 import styles from "./index.module.css";
 
 const Menu = () => {
-  const { firebase, currentUser } = useContext(FirebaseContext);
+  const { firebase } = useContext(FirebaseContext);
+  const currentUser = JSON.parse(localStorage.getItem("authUser"));
+
   return (
     <Nav>
       <NavDropdown

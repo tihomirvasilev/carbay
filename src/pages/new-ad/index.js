@@ -3,7 +3,6 @@ import randomString from "crypto-random-string";
 import { withRouter } from "react-router-dom";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
-import Layout from "../../components/layout";
 import FormValidation from "../../utils/from-validation";
 import validateAd from "./validateAd";
 import styles from "./index.module.css";
@@ -28,6 +27,7 @@ const INITIAL_STATE = {
 
 const CreateAdPage = (props) => {
   const { firebase, currentUser } = useContext(FirebaseContext);
+  const userData = JSON.parse(localStorage.getItem("authUser"));
   const { handleSubmit, handleChange, values, errors } = FormValidation(
     INITIAL_STATE,
     validateAd,
@@ -115,15 +115,15 @@ const CreateAdPage = (props) => {
       phone: values.phone,
       createdOn: Date.now(),
       creatorId: currentUser.uid,
-      creatorName: currentUser.displayName,
+      creatorName: userData.displayName,
     };
-
+    console.log(newAd);
     await firebase.db.collection("ads").add(newAd);
     props.history.push("/");
   }
 
   return (
-    <Layout>
+    <>
       <Form onSubmit={handleSubmit}>
         <Form.Row>
           <Form.Group as={Col} sm={3} controlId="brand">
@@ -315,7 +315,7 @@ const CreateAdPage = (props) => {
         </Form.Row>
         <Button type="submit">Add</Button>
       </Form>
-    </Layout>
+    </>
   );
 };
 

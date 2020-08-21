@@ -12,11 +12,11 @@ const FavoritesPage = () => {
   }, [firebase]);
 
   return (
-    <Layout>
+    <>
       {ads.map((ad, index) => (
         <Ad key={index} {...ad} />
       ))}
-    </Layout>
+    </>
   );
 };
 

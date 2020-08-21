@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 
 import { FirebaseContext } from "../../firebase";
-import Layout from "../../components/layout";
 import Ad from "../../components/ad";
 
 const HomePage = () => {
@@ -13,11 +12,11 @@ const HomePage = () => {
   }, [firebase]);
 
   return (
-    <Layout>
+    <>
       {ads.map((ad, index) => (
         <Ad key={index} {...ad} />
       ))}
-    </Layout>
+    </>
   );
 };
 

@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 import FirebaseContext from "../../firebase/context";
-import GC from "../../constants";
 import Input from "../../components/input";
 import BrandsList from "../../components/brands-list";
 import AdminLayout from "../../components/admin-layout";
@@ -14,8 +13,8 @@ const INITIAL_STATE = {
   name: "",
 };
 
-const BrandsAdmin = ({ history }) => {
-  const { firebase, currentUser } = useContext(FirebaseContext);
+const BrandsAdmin = () => {
+  const { firebase } = useContext(FirebaseContext);
 
   const [brands, setBrands] = useState([]);
 
@@ -30,18 +29,14 @@ const BrandsAdmin = ({ history }) => {
 
   function createBrand() {
     const hasErrors = Object.keys(errors).length > 0;
-    if (!currentUser) {
-      history.push(GC.ROUTES.USER.LOGIN);
-    } else {
-      if (!hasErrors) {
-        const { name } = values;
-        const newBrand = {
-          name,
-          models: [],
-        };
+    if (!hasErrors) {
+      const { name } = values;
+      const newBrand = {
+        name,
+        models: [],
+      };
 
-        firebase.db.collection("brands").add(newBrand);
-      }
+      firebase.db.collection("brands").add(newBrand);
     }
   }
 

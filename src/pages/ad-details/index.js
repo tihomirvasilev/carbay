@@ -34,7 +34,7 @@ const AdDetailsPage = (props) => {
   };
 
   return (
-    <Layout>
+    <>
       <Row md={12}>
         <Col md={6}>
           <Row>
@@ -107,7 +107,7 @@ const AdDetailsPage = (props) => {
           </Carousel>
         </Col>
       </Row>
-    </Layout>
+    </>
   );
 };
 
