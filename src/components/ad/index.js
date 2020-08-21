@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
 import { BsFillXOctagonFill, BsFillXDiamondFill } from "react-icons/bs";
 import FavoriteButton from "../favorite-button";
-import DateFormat from "../../utils/date";
+import func from "../../utils/date";
 import styles from "./index.module.css";
 
 const Ad = ({
@@ -33,7 +33,7 @@ const Ad = ({
           </Link>
         </Col>
         <Col lg={4}>
-          <div className={styles.date}>{DateFormat(createdOn)}</div>
+          <div className={styles.date}>{func.DateFormat(createdOn)}</div>
           <Link className={styles["car-link"]} id={id} to={"/ad/" + id}>
             <div className={styles["bold-lg"]}>
               {brand} {model}
