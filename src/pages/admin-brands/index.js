@@ -52,7 +52,7 @@ const BrandsAdmin = () => {
         />
         <Button type="submit">Add</Button>
       </Form>
-      <AdminList items={brands} />>
+      <AdminList items={brands} />
     </AdminLayout>
   );
 };
