@@ -9,14 +9,15 @@ const AuthProvider = (props) => {
       async (authUser) => {
         if (authUser) {
           const userDb = await firebase.getUserById(authUser.uid);
-
-          authUser = {
-            uid: authUser.uid,
-            id: userDb.id,
-            displayName: authUser.displayName,
-            isAdmin: userDb.roles === "admin" ? true : false,
-            favorites: userDb.favorites,
-          };
+          if (userDb) {
+            authUser = {
+              uid: authUser.uid,
+              id: userDb ? userDb.id : "",
+              displayName: authUser.displayName,
+              isAdmin: userDb.roles === "admin" ? true : false,
+              favorites: userDb.favorites,
+            };
+          }
         }
         localStorage.setItem("authUser", JSON.stringify(authUser));
         setCurrentUser(authUser);

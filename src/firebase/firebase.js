@@ -13,7 +13,7 @@ class Firebase {
     this.storage = app.storage();
   }
 
-  register(name, phone, email, password) {
+  register(name, email, password) {
     this.auth
       .createUserWithEmailAndPassword(email, password)
       .then(async (res) => {
@@ -24,7 +24,6 @@ class Firebase {
         this.db.collection("users").add({
           uid: res.user.uid,
           roles: "user",
-          phone: phone,
           favorites: [],
         });
 

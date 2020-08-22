@@ -28,10 +28,10 @@ const RegisterPage = (props) => {
   const [firebaseError, setFirebaseError] = useState(null);
 
   function handleRegister() {
-    const { name, phone, email, password } = values;
+    const { name, email, password } = values;
     if (Object.keys(errors).length === 0) {
       try {
-        firebase.register(name, phone, email, password);
+        firebase.register(name, email, password);
         props.history.push("/");
       } catch (err) {
         console.error("Authentication Error", err);
