@@ -3,6 +3,7 @@ import randomString from "crypto-random-string";
 import { withRouter } from "react-router-dom";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
+import Title from "../../components/title"
 import FormValidation from "../../utils/from-validation";
 import validateAd from "./validateAd";
 import func from "../../utils/date";
@@ -115,13 +116,16 @@ const CreateAdPage = (props) => {
 
   return (
     <>
+    <Title title="Нова Обява" />
       <Form onSubmit={handleSubmit}>
+        <h5>Информация</h5>
+        <hr/>
         <Form.Row>
           <Form.Group as={Col} sm={3} controlId="brand">
-            <Form.Label>Brand</Form.Label>
+            <Form.Label>Марка</Form.Label>
             <Form.Control as="select" name="brand" onChange={handleBrandChange}>
               <option key="" value={JSON.stringify({ models: [] })}>
-                Select Brand
+                Избери Марка
               </option>
               {brands.map((b, i) => (
                 <option key={i} value={JSON.stringify(b)}>
@@ -131,10 +135,10 @@ const CreateAdPage = (props) => {
             </Form.Control>
           </Form.Group>
           <Form.Group as={Col} sm={3} controlId="model">
-            <Form.Label>Model</Form.Label>
+            <Form.Label>Модел</Form.Label>
             <Form.Control as="select" name="model" onChange={handleChange}>
               <option key="" value="">
-                Select Model
+                Избери Модел
               </option>
               {models.map((b, index) => (
                 <option key={index} value={b}>
@@ -144,98 +148,99 @@ const CreateAdPage = (props) => {
             </Form.Control>
           </Form.Group>
           <Form.Group as={Col} sm={3} controlId="modification">
-            <Form.Label>Modification</Form.Label>
+            <Form.Label>Разновидност</Form.Label>
             <Form.Control
               name="modification"
               onChange={handleChange}
-              placeholder="Modification"
+              placeholder="Разновидност"
             />
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} sm={3} controlId="category">
-            <Form.Label>Category</Form.Label>
+            <Form.Label>Категория</Form.Label>
             <Form.Control as="select" name="category" onChange={handleChange}>
-              <option key="select category">Select Category</option>
-              <option key="Estate">Estate</option>
-              <option key="Hatchback">Hatchback</option>
-              <option key="Coupe">Coupe</option>
-              <option key="Van">Van</option>
+              <option key="select category">Избери категория</option>
+              <option key="Estate" value="Estate">Комби</option>
+              <option key="Hatchback" value="Hatchback">Хечбек</option>
+              <option key="Coupe" value="Coupe">Купе</option>
+              <option key="Van" value="Van">Ван</option>
+              <option key="Van" value="Sedan">Седан</option>
             </Form.Control>
           </Form.Group>
 
           <Form.Group as={Col} sm={3} controlId="first-registration">
-            <Form.Label>First Registration</Form.Label>
+            <Form.Label>Първа Регистрация</Form.Label>
             <Form.Control
               as="select"
               name="firstRegistration"
               type="number"
               onChange={handleChange}
             >
-              <option>Select Year</option>
+              <option>Избери година</option>
               {years.map((y, i) => (
                 <option key={i}>{y}</option>
               ))}
             </Form.Control>
           </Form.Group>
           <Form.Group as={Col} sm={3} controlId="milage">
-            <Form.Label>Milage</Form.Label>
+            <Form.Label>Пробег</Form.Label>
             <Form.Control
               name="milage"
               type="number"
               onChange={handleChange}
-              placeholder="Enter Milage"
+              placeholder="Пробег км."
             />
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} sm={2} controlId="engine">
-            <Form.Label>Engine</Form.Label>
+            <Form.Label>Гориво</Form.Label>
             <Form.Control as="select" name="engine" onChange={handleChange}>
-              <option value="">Select Engine</option>
-              <option>Petrol</option>
-              <option>Diesel</option>
-              <option>LPG</option>
-              <option>SNG</option>
+              <option value="">Избери гориво</option>
+              <option value="Petrol">Бензин</option>
+              <option value="Diesel">Дизел</option>
+              <option value="LPG">Газ</option>
+              <option value="SNG">Метан</option>
             </Form.Control>
           </Form.Group>
 
           <Form.Group as={Col} sm={2} controlId="transmission">
-            <Form.Label>Transmission</Form.Label>
+            <Form.Label>Скорости</Form.Label>
             <Form.Control
               as="select"
               name="transmission"
               onChange={handleChange}
             >
-              <option>Select Transmission</option>
-              <option>Manual</option>
-              <option>Automatic</option>
+              <option>Избери скорости</option>
+              <option>Ръчни</option>
+              <option>Автоматични</option>
             </Form.Control>
           </Form.Group>
           <Form.Group as={Col} sm={2} controlId="power">
-            <Form.Label>Power</Form.Label>
+            <Form.Label>Мощност</Form.Label>
             <Form.Control
               name="power"
               type="number"
               onChange={handleChange}
-              placeholder="Enter Power"
+              placeholder="Мощност конски сили"
             />
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} sm={2} controlId="price">
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Цена</Form.Label>
             <Form.Control
               name="price"
               type="number"
               onChange={handleChange}
-              placeholder="Enter Price"
+              placeholder="Цена в лв."
             />
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} sm={5}>
-            <Form.Label>Add Photos</Form.Label>
+            <Form.Label>Добави Снимка</Form.Label>
             <Form.File
               onChange={handleImageAsFile}
               name="image"
@@ -260,7 +265,7 @@ const CreateAdPage = (props) => {
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} sm={5} controlId="description">
-            <Form.Label>Description</Form.Label>
+            <Form.Label>Допълнителна Информация</Form.Label>
             <Form.Control
               as="textarea"
               rows="4"
@@ -269,24 +274,8 @@ const CreateAdPage = (props) => {
             />
           </Form.Group>
         </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} sm={3} controlId="phone">
-            <Form.Label>Phone Number</Form.Label>
-            <Form.Control
-              name="phone"
-              onChange={handleChange}
-              placeholder="Enter Phone Number"
-            />
-          </Form.Group>
-          <Form.Group as={Col} sm={3} controlId="city">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              name="city"
-              onChange={handleChange}
-              placeholder="Enter City"
-            />
-          </Form.Group>
-        </Form.Row>
+        <h5>Допълнителни Екстри</h5>
+        <hr/>
         <Form.Row>
           <Form.Group as={Col} controlId="formBasicCheckbox">
             <Row sm={12}>
@@ -304,7 +293,27 @@ const CreateAdPage = (props) => {
             </Row>
           </Form.Group>
         </Form.Row>
-        <Button type="submit">Add</Button>
+        <h5>Контакти</h5>
+        <hr/>
+        <Form.Row>
+          <Form.Group as={Col} sm={3} controlId="phone">
+            <Form.Label>Телефон за връзка</Form.Label>
+            <Form.Control
+              name="phone"
+              onChange={handleChange}
+              placeholder="Телефон за връзка..."
+            />
+          </Form.Group>
+          <Form.Group as={Col} sm={3} controlId="city">
+            <Form.Label>Град</Form.Label>
+            <Form.Control
+              name="city"
+              onChange={handleChange}
+              placeholder="Град.."
+            />
+          </Form.Group>
+        </Form.Row>
+        <Button type="submit">Добави</Button>
       </Form>
     </>
   );
