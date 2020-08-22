@@ -1,8 +1,10 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
-import { BsFillXOctagonFill, BsFillXDiamondFill } from "react-icons/bs";
-import FavoriteButton from "../favorite-button";
+import { BsFillXOctagonFill } from "react-icons/bs";
+import DeleteButton from "../../components/delete-button";
+import EditButton from "../../components/edit-button";
+
 import func from "../../utils/date";
 import styles from "./index.module.css";
 
@@ -17,13 +19,11 @@ const Ad = ({
   firstRegistration,
   price,
   city,
-  handleDelete,
   isCreator = false,
-  user,
-  currentUser,
+  isFavorites = false,
+  removeFavorite,
 }) => {
-  const haveButtons = isCreator && currentUser;
-  const haveFavorites = !isCreator && currentUser && !haveButtons;
+  const favorites = !isCreator && isFavorites;
   return (
     <Container fluid>
       <Row className={styles["ad-wrapper"]}>
@@ -60,27 +60,16 @@ const Ad = ({
         <Col lg={2}>
           {isCreator && (
             <>
-              <div>
-                <Link to={`/edit/${id}`}>
-                  <BsFillXDiamondFill className={styles.button} />
-                  <span className={styles["button-name"]}>Edit</span>
-                </Link>
-              </div>
-              <div>
-                <Link to="/my-ads" onClick={() => handleDelete(id)}>
-                  <BsFillXOctagonFill className={styles.button} />
-                  <span className={styles["button-name"]}>Remove</span>
-                </Link>
-              </div>
+              <EditButton id={id} />
+              <DeleteButton id={id} collection="ads" />
             </>
           )}
-          {haveFavorites && (
-            <FavoriteButton
-              user={user}
-              currentUser={currentUser}
-              adId={id}
-              isCreator={isCreator}
-            />
+          {favorites && (
+            <div>
+              <Link to="/" onClick={() => removeFavorite(id)}>
+                <BsFillXOctagonFill className={styles.button} />
+              </Link>
+            </div>
           )}
         </Col>
       </Row>

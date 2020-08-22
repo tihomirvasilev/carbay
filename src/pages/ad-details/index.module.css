@@ -6,3 +6,16 @@
 .text {
   word-break: break-all;
 }
+
+.favorites {
+  color: orangered;
+}
+
+.button {
+  color: orangered !important;
+}
+
+.button-name {
+  color: black;
+  padding-left: 5px;
+}

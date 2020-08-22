@@ -35,14 +35,6 @@ const AdminNav = (props) => {
                   Екстри
                 </Nav.Link>
               </Nav.Item>
-              <Nav.Item className={styles["nav-item"]}>
-                <Nav.Link
-                  href={GC.ROUTES.ADMIN.ADS}
-                  className={styles["nav-link"]}
-                >
-                  Обяви
-                </Nav.Link>
-              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>

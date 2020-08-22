@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner, Container } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 
 import styles from "./index.module.css";
 

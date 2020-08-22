@@ -74,7 +74,7 @@ const ModelsAdmin = ({ history }) => {
         <Button type="submit">Add</Button>
       </Form>
       <br />
-      <AdminList items={models} />
+      <AdminList items={models} collection="models" />
     </AdminLayout>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Form, Button, Col, Row } from "react-bootstrap";
+import { Form, Button, Col } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
 import FormValidation from "../../utils/from-validation";
 import validateSearch from "./validateSearch";

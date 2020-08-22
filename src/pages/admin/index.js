@@ -1,9 +1,8 @@
 import React from "react";
-
 import AdminLayout from "../../components/admin-layout";
 
-const AdminPage = () => {
+const AdminPanel = () => {
   return <AdminLayout></AdminLayout>;
 };
 
-export default AdminPage;
+export default AdminPanel;

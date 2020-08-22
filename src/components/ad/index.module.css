@@ -48,14 +48,6 @@
   margin: 10px;
 }
 
-.button {
-  color: orangered !important;
-}
-
-.button-name {
-  padding-left: 5px;
-}
-
 .button-name :hover {
   text-decoration: none;
 }

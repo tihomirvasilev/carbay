@@ -116,8 +116,8 @@ class Firebase {
       });
   }
 
-  async deleteAd(id) {
-    await this.db.collection("ads").doc(id).delete();
+  async deleteDoc(collection, id) {
+    await this.db.collection(collection).doc(id).delete();
   }
 
   async getCollectionSnapshotDocs(collection, setState) {
