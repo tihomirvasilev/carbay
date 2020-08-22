@@ -1,6 +1,10 @@
 # CarBay
 #### SofUni React.js course project
 
+## Can be seen on firebase hosting
+https://carbay-b65be.web.app
+   account: admin@admin.com / asdasd
+
 ## Created with:
  #### front-end:
  - React.js
