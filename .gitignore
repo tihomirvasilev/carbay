@@ -1,3 +1,7 @@
 node_modules
 .idea
 /.env
+/build
+/.firebase
+/.firebaserc
+/firebase.json
