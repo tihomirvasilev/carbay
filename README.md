@@ -3,7 +3,7 @@
 
 ## Can be seen on firebase hosting
 https://carbay-b65be.web.app
-admin account: admin@admin.com / asdasd
+   account: admin@admin.com / asdasd
 
 ## Created with:
  #### front-end:
