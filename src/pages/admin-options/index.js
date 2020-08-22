@@ -6,7 +6,7 @@ import GC from "../../constants";
 import FirebaseContext from "../../firebase/context";
 import validateOption from "../../pages/admin-options/validateOption";
 import FormValidation from "../../utils/from-validation";
-import OptionsList from "../../components/options-list";
+import AdminList from "../../components/admin-list";
 import AdminLayout from "../../components/admin-layout";
 import Input from "../../components/input";
 
@@ -56,7 +56,7 @@ const OptionsPage = ({ history }) => {
         <Button type="submit">Add</Button>
       </Form>
       <br />
-      <OptionsList options={options} />
+      <AdminList items={options} />
     </AdminLayout>
   );
 };

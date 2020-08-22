@@ -7,7 +7,7 @@ import FirebaseContext from "../../firebase/context";
 import FormValidation from "../../utils/from-validation";
 import ValidateModel from "./validation";
 import Input from "../../components/input";
-import ModelList from "../../components/models-list";
+import AdminList from "../../components/admin-list";
 import AdminLayout from "../../components/admin-layout";
 
 const INITIAL_STATE = {
@@ -74,7 +74,7 @@ const ModelsAdmin = ({ history }) => {
         <Button type="submit">Add</Button>
       </Form>
       <br />
-      <ModelList models={models} />
+      <AdminList items={models} />
     </AdminLayout>
   );
 };
