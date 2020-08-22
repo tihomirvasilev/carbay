@@ -56,7 +56,7 @@ const OptionsPage = ({ history }) => {
         <Button type="submit">Add</Button>
       </Form>
       <br />
-      <AdminList items={options} />
+      <AdminList items={options} collection="options" />
     </AdminLayout>
   );
 };

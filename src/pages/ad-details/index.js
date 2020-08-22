@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
+import { BsFillStarFill } from "react-icons/bs";
 import { FirebaseContext } from "../../firebase";
 import { Row, Col } from "react-bootstrap";
 
@@ -18,7 +19,7 @@ const INITIAL_STATE = {
 };
 const AdDetailsPage = (props) => {
   const { id } = props.match.params;
-  const { firebase } = useContext(FirebaseContext);
+  const { firebase, currentUser } = useContext(FirebaseContext);
 
   const [ad, setAd] = useState(INITIAL_STATE);
 
@@ -32,16 +33,40 @@ const AdDetailsPage = (props) => {
     setIndex(selectedIndex);
   };
 
+  async function addToFavorites() {
+    const favorites = currentUser.favorites;
+
+    if (!favorites.includes(id)) {
+      favorites.push(id);
+      currentUser.favorites = favorites;
+      localStorage.setItem("authUser", JSON.stringify(currentUser));
+      const brandRef = firebase.db.collection("users").doc(currentUser.id);
+      await brandRef.update({
+        favorites: favorites,
+      });
+    }
+  }
+
   return (
     <>
       <Row md={12}>
         <Col md={6}>
           <Row>
-            <Col>
+            <Col md={6}>
               <h4>
                 {ad.brand} {ad.model} {ad.modification}
               </h4>
             </Col>
+            {currentUser && (
+              <Col md={6}>
+                <Link to="/favorites" onClick={addToFavorites}>
+                  <BsFillStarFill className={styles.favorites} />{" "}
+                  <span className={styles["button-name"]}>
+                    Добави към Бележник
+                  </span>
+                </Link>
+              </Col>
+            )}
           </Row>
           <hr />
           <Row>

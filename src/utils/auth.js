@@ -12,7 +12,7 @@ const AuthProvider = (props) => {
 
           authUser = {
             uid: authUser.uid,
-            docId: userDb.id,
+            id: userDb.id,
             displayName: authUser.displayName,
             isAdmin: userDb.roles === "admin" ? true : false,
             favorites: userDb.favorites,

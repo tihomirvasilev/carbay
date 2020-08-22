@@ -3,7 +3,6 @@ import randomString from "crypto-random-string";
 import { withRouter } from "react-router-dom";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
-import Layout from "../../components/layout";
 import FormValidation from "../../utils/from-validation";
 import validateAd from "./validateAd";
 import func from "../../utils/date";

@@ -16,7 +16,6 @@ const GC = {
       BRANDS: "/admin/brands",
       MODELS: "/admin/models",
       OPTIONS: "/admin/options",
-      ADS: "/admin/ads",
     },
   },
 };

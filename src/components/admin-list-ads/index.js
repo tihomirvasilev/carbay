@@ -2,21 +2,26 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import DeleteButton from "../../components/delete-button";
 
-const AdminList = ({ items, collection }) => {
+const AdminListAds = ({ items, collection }) => {
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
-          <th>Name</th>
+          <th>Марка</th>
+          <th>Модел</th>
+          <th>Категория</th>
+          <th>Град</th>
         </tr>
       </thead>
       <tbody>
         {items.map((item, index) => (
           <tr key={index}>
             <td>{index + 1}</td>
-            {item.name && <td>{item.name}</td>}
-            {!item.name && <td>{item}</td>}
+            <td>{item.brand}</td>
+            <td>{item.model}</td>
+            <td>{item.category}</td>
+            <td>{item.city}</td>
             <td>
               <DeleteButton
                 id={item.id}
@@ -31,4 +36,4 @@ const AdminList = ({ items, collection }) => {
   );
 };
 
-export default AdminList;
+export default AdminListAds;

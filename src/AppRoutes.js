@@ -6,7 +6,7 @@ const HomePage = React.lazy(() => import("./pages/home"));
 const LoginPage = React.lazy(() => import("./pages/login"));
 const RegisterPage = React.lazy(() => import("./pages/register"));
 const MyAdsPage = React.lazy(() => import("./pages/my-ads"));
-const AdminPage = React.lazy(() => import("./pages/admin"));
+const AdminPanel = React.lazy(() => import("./pages/admin"));
 const BrandsAdminPage = React.lazy(() => import("./pages/admin-brands"));
 const ModelsAdminPage = React.lazy(() => import("./pages/admin-models"));
 const OptionsAdminPage = React.lazy(() => import("./pages/admin-options"));
@@ -55,11 +55,10 @@ const AppRouter = () => {
       <PrivateRoute path={GC.ROUTES.USER.NEWAD} component={NewAd} />
       <PrivateRoute path={GC.ROUTES.USER.FAVORITES} component={FavoritesPage} />
       <PrivateRoute path={GC.ROUTES.USER.EDITAD} component={EditAd} />
-      <AdminRoute path={GC.ROUTES.ADMIN.PANEL} exact component={AdminPage} />
       <AdminRoute path={GC.ROUTES.ADMIN.BRANDS} component={BrandsAdminPage} />
       <AdminRoute path={GC.ROUTES.ADMIN.MODELS} component={ModelsAdminPage} />
       <AdminRoute path={GC.ROUTES.ADMIN.OPTIONS} component={OptionsAdminPage} />
-      <AdminRoute path={GC.ROUTES.ADMIN.ADS} component={AdminPage} />
+      <AdminRoute path={GC.ROUTES.ADMIN.PANEL} component={AdminPanel} />
     </Switch>
   );
 };

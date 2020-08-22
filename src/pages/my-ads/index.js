@@ -14,14 +14,10 @@ const MyAdsPage = ({ history }) => {
     firebase.getMyAds(uid, setAds);
   }, [firebase, uid, ads]);
 
-  const handleDelete = async (id) => {
-    await firebase.deleteAd(id);
-  };
-
   return (
     <>
       {ads.map((ad, index) => (
-        <Ad key={index} {...ad} isCreator={true} handleDelete={handleDelete} />
+        <Ad key={index} {...ad} isCreator={true} />
       ))}
     </>
   );

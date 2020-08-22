@@ -3,9 +3,9 @@ import { withRouter } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 import FirebaseContext from "../../firebase/context";
+import AdminList from "../../components/admin-list";
 import Input from "../../components/input";
 import AdminLayout from "../../components/admin-layout";
-import AdminList from "../../components/admin-list";
 import FormValidation from "../../utils/from-validation";
 import validateBrand from "./validateBrand";
 
@@ -52,7 +52,7 @@ const BrandsAdmin = () => {
         />
         <Button type="submit">Add</Button>
       </Form>
-      <AdminList items={brands} />
+      <AdminList items={brands} collection="brands" />
     </AdminLayout>
   );
 };

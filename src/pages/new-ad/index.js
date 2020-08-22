@@ -3,7 +3,7 @@ import randomString from "crypto-random-string";
 import { withRouter } from "react-router-dom";
 import { Form, Col, Button, Row } from "react-bootstrap";
 import { FirebaseContext } from "../../firebase";
-import Title from "../../components/title"
+import Title from "../../components/title";
 import FormValidation from "../../utils/from-validation";
 import validateAd from "./validateAd";
 import func from "../../utils/date";
@@ -28,6 +28,7 @@ const INITIAL_STATE = {
 };
 
 const CreateAdPage = (props) => {
+  //TODO: VALIDATIONS
   const { firebase, currentUser } = useContext(FirebaseContext);
   const userData = JSON.parse(localStorage.getItem("authUser"));
   const { handleSubmit, handleChange, values, errors } = FormValidation(
@@ -116,10 +117,10 @@ const CreateAdPage = (props) => {
 
   return (
     <>
-    <Title title="Нова Обява" />
+      <Title title="Нова Обява" />
       <Form onSubmit={handleSubmit}>
         <h5>Информация</h5>
-        <hr/>
+        <hr />
         <Form.Row>
           <Form.Group as={Col} sm={3} controlId="brand">
             <Form.Label>Марка</Form.Label>
@@ -161,11 +162,21 @@ const CreateAdPage = (props) => {
             <Form.Label>Категория</Form.Label>
             <Form.Control as="select" name="category" onChange={handleChange}>
               <option key="select category">Избери категория</option>
-              <option key="Estate" value="Estate">Комби</option>
-              <option key="Hatchback" value="Hatchback">Хечбек</option>
-              <option key="Coupe" value="Coupe">Купе</option>
-              <option key="Van" value="Van">Ван</option>
-              <option key="Van" value="Sedan">Седан</option>
+              <option key="Estate" value="Estate">
+                Комби
+              </option>
+              <option key="Hatchback" value="Hatchback">
+                Хечбек
+              </option>
+              <option key="Coupe" value="Coupe">
+                Купе
+              </option>
+              <option key="Van" value="Van">
+                Ван
+              </option>
+              <option key="Van" value="Sedan">
+                Седан
+              </option>
             </Form.Control>
           </Form.Group>
 
@@ -275,7 +286,7 @@ const CreateAdPage = (props) => {
           </Form.Group>
         </Form.Row>
         <h5>Допълнителни Екстри</h5>
-        <hr/>
+        <hr />
         <Form.Row>
           <Form.Group as={Col} controlId="formBasicCheckbox">
             <Row sm={12}>
@@ -294,7 +305,7 @@ const CreateAdPage = (props) => {
           </Form.Group>
         </Form.Row>
         <h5>Контакти</h5>
-        <hr/>
+        <hr />
         <Form.Row>
           <Form.Group as={Col} sm={3} controlId="phone">
             <Form.Label>Телефон за връзка</Form.Label>
