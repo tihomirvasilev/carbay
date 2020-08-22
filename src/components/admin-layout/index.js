@@ -7,7 +7,7 @@ import Title from "../../components/title";
 const AdminLayout = ({ children }) => {
   return (
     <>
-      <Title title={"Admin Panel"} />
+      <Title title={"Администратор"} />
       <AdminPanelNav>
         <Row>
           <Col sm={{ span: 5, offset: 2 }}>{children}</Col>

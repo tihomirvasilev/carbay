@@ -16,7 +16,7 @@ const AdminNav = (props) => {
                   href={GC.ROUTES.ADMIN.BRANDS}
                   className={styles["nav-link"]}
                 >
-                  Brands
+                  Марки
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item className={styles["nav-item"]}>
@@ -24,7 +24,7 @@ const AdminNav = (props) => {
                   href={GC.ROUTES.ADMIN.MODELS}
                   className={styles["nav-link"]}
                 >
-                  Models
+                  Модели
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item className={styles["nav-item"]}>
@@ -32,7 +32,7 @@ const AdminNav = (props) => {
                   href={GC.ROUTES.ADMIN.OPTIONS}
                   className={styles["nav-link"]}
                 >
-                  Options
+                  Екстри
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item className={styles["nav-item"]}>
@@ -40,7 +40,7 @@ const AdminNav = (props) => {
                   href={GC.ROUTES.ADMIN.ADS}
                   className={styles["nav-link"]}
                 >
-                  Ads
+                  Обяви
                 </Nav.Link>
               </Nav.Item>
             </Nav>
