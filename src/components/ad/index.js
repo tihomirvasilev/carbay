@@ -17,9 +17,13 @@ const Ad = ({
   firstRegistration,
   price,
   city,
-  isCreator = false,
   handleDelete,
+  isCreator = false,
+  user,
+  currentUser,
 }) => {
+  const haveButtons = isCreator && currentUser;
+  const haveFavorites = !isCreator && currentUser && !haveButtons;
   return (
     <Container fluid>
       <Row className={styles["ad-wrapper"]}>
@@ -70,7 +74,14 @@ const Ad = ({
               </div>
             </>
           )}
-          {!isCreator && <FavoriteButton />}
+          {haveFavorites && (
+            <FavoriteButton
+              user={user}
+              currentUser={currentUser}
+              adId={id}
+              isCreator={isCreator}
+            />
+          )}
         </Col>
       </Row>
       <hr className={styles.hr} />
