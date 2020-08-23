@@ -15,32 +15,26 @@ const INITIAL_STATE = {
   rePassword: "",
 };
 
-const RegisterPage = (props) => {
+const RegisterPage = ({ history }) => {
   const { firebase } = useContext(FirebaseContext);
-  const {
-    handleSubmit,
-    handleBlur,
-    handleChange,
-    values,
-    errors,
-  } = FormValidation(INITIAL_STATE, validateRegister, handleRegister);
+  const { handleSubmit, handleChange, values, errors } = FormValidation(
+    INITIAL_STATE,
+    validateRegister,
+    handleRegister
+  );
 
   const [firebaseError, setFirebaseError] = useState(null);
 
   function handleRegister() {
     const { name, email, password } = values;
-    if (Object.keys(errors).length === 0) {
-      try {
-        firebase.register(name, email, password);
-        props.history.push("/");
-      } catch (err) {
-        console.error("Authentication Error", err);
-        setFirebaseError(err.message);
-      }
+    try {
+      firebase.register(name, email, password);
+    } catch (err) {
+      setFirebaseError(err.message);
     }
-
-    if (firebaseError) {
-      props.history.push("/error");
+    console.log(errors);
+    if (Object.keys(errors).length === 0) {
+      history.push("/");
     }
   }
   return (
@@ -53,7 +47,6 @@ const RegisterPage = (props) => {
                 label="Name"
                 name="name"
                 onChange={handleChange}
-                onBlur={handleBlur}
                 placeHolder="Your Name"
                 value={values.name}
                 errors={errors}
@@ -62,7 +55,6 @@ const RegisterPage = (props) => {
                 label="Email address"
                 name="email"
                 onChange={handleChange}
-                onBlur={handleBlur}
                 type="email"
                 placeHolder="Enter email"
                 value={values.email}
@@ -72,7 +64,6 @@ const RegisterPage = (props) => {
                 label="Password"
                 name="password"
                 onChange={handleChange}
-                onBlur={handleBlur}
                 type="password"
                 placeHolder="Enter Password"
                 value={values.password}
@@ -82,12 +73,13 @@ const RegisterPage = (props) => {
                 label="Repeat Password"
                 name="rePassword"
                 onChange={handleChange}
-                onBlur={handleBlur}
                 type="password"
                 placeHolder="Repeat Password"
                 value={values.rePassword}
                 errors={errors}
               />
+              {firebaseError && <span>{{ firebaseError }}</span>}
+
               <div className={styles["button-container"]}>
                 <Button className={styles.button} type="submit">
                   Register

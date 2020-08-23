@@ -10,6 +10,8 @@ import Input from "../../components/input";
 import AdminList from "../../components/admin-list";
 import AdminLayout from "../../components/admin-layout";
 
+import styles from "./index.module.css";
+
 const INITIAL_STATE = {
   brand: "",
   name: "",
@@ -71,7 +73,11 @@ const ModelsAdmin = ({ history }) => {
           value={values.name}
           errors={errors}
         />
-        <Button type="submit">Add</Button>
+        <div className={styles["button-container"]}>
+          <Button type="submit" className={styles.button}>
+            Добави
+          </Button>
+        </div>
       </Form>
       <br />
       <AdminList items={models} collection="models" />

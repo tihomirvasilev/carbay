@@ -32,7 +32,6 @@ const Search = () => {
   }, [firebase, ads]);
 
   async function doSearch() {
-    console.log(errors);
     if (Object.keys(errors).length === 0) {
       const ads = [];
       const model = values.model;
@@ -51,7 +50,6 @@ const Search = () => {
         });
       });
       setAds(ads);
-      console.log(ads);
     }
   }
 

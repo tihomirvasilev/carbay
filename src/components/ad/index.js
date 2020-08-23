@@ -61,7 +61,7 @@ const Ad = ({
           {isCreator && (
             <>
               <EditButton id={id} />
-              <DeleteButton id={id} collection="ads" />
+              <DeleteButton id={id} collection="ads" path="/my-ads" />
             </>
           )}
           {favorites && (

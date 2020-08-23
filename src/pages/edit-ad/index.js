@@ -276,8 +276,13 @@ const EditAdPage = (props) => {
               placeholder="Enter City"
             />
           </Form.Group>
-        </Form.Row>
-        <Button type="submit">Update</Button>
+        </Form.Row>{" "}
+        <hr />
+        <div className={styles["button-container"]}>
+          <Button type="submit" className={styles.button}>
+            Запази
+          </Button>
+        </div>
       </Form>
     </>
   );
