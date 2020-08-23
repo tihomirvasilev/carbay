@@ -51,7 +51,6 @@ const AppRouter = () => {
       <Route path={GC.ROUTES.USER.AD} component={AdDetailsPage} />
       <Route path={GC.ROUTES.USER.SEARCH} component={SearchPage} />
       <PrivateRoute path={GC.ROUTES.USER.MYADS} component={MyAdsPage} />
-      <PrivateRoute path="/ad/delete" component={MyAdsPage} />
       <PrivateRoute path={GC.ROUTES.USER.NEWAD} component={NewAd} />
       <PrivateRoute path={GC.ROUTES.USER.FAVORITES} component={FavoritesPage} />
       <PrivateRoute path={GC.ROUTES.USER.EDITAD} component={EditAd} />

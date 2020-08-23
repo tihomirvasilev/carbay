@@ -21,8 +21,10 @@ function FormValidation(initialState, validate, callback) {
     event.preventDefault();
     const validationErrors = validate(values);
     setErrors(validationErrors);
-    callback();
-    setValues(initialState);
+    if (Object.keys(errors).length === 0) {
+      callback();
+      setValues(initialState);
+    }
   }
 
   return {

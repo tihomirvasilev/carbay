@@ -10,6 +10,7 @@ import AdminList from "../../components/admin-list";
 import AdminLayout from "../../components/admin-layout";
 import Input from "../../components/input";
 
+import styles from "./index.module.css";
 const INITIAL_STATE = {
   name: "",
 };
@@ -53,7 +54,11 @@ const OptionsPage = ({ history }) => {
           value={values.name}
           errors={errors}
         />
-        <Button type="submit">Add</Button>
+        <div className={styles["button-container"]}>
+          <Button type="submit" className={styles.button}>
+            Добави
+          </Button>
+        </div>
       </Form>
       <br />
       <AdminList items={options} collection="options" />

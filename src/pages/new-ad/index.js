@@ -27,15 +27,17 @@ const INITIAL_STATE = {
   phone: "",
 };
 
-const CreateAdPage = (props) => {
+const CreateAdPage = ({ history }) => {
   //TODO: VALIDATIONS
   const { firebase, currentUser } = useContext(FirebaseContext);
   const userData = JSON.parse(localStorage.getItem("authUser"));
-  const { handleSubmit, handleChange, values, errors } = FormValidation(
-    INITIAL_STATE,
-    validateAd,
-    createAd
-  );
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    values,
+    errors,
+  } = FormValidation(INITIAL_STATE, validateAd, createAd);
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
   const [options, setOptions] = useState([]);
@@ -90,29 +92,34 @@ const CreateAdPage = (props) => {
   }
 
   async function createAd() {
-    const newAd = {
-      imageUrls: pictures,
-      brand: JSON.parse(values.brand).name,
-      model: values.model,
-      modification: values.modification,
-      category: values.category,
-      firstRegistration: Number(values.firstRegistration),
-      milage: Number(values.milage),
-      engine: values.engine,
-      transmission: values.transmission,
-      power: Number(values.power),
-      options: currentOptions,
-      price: Number(values.price),
-      description: values.description,
-      city: values.city,
-      phone: values.phone,
-      createdOn: Date.now(),
-      creatorId: currentUser.uid,
-      creatorName: userData.displayName,
-    };
-    console.log(newAd);
-    await firebase.db.collection("ads").add(newAd);
-    props.history.push("/");
+    try {
+      const newAd = {
+        imageUrls: pictures,
+        brand: JSON.parse(values.brand).name,
+        model: values.model,
+        modification: values.modification,
+        category: values.category,
+        firstRegistration: Number(values.firstRegistration),
+        milage: Number(values.milage),
+        engine: values.engine,
+        transmission: values.transmission,
+        power: Number(values.power),
+        options: currentOptions,
+        price: Number(values.price),
+        description: values.description,
+        city: values.city,
+        phone: values.phone,
+        createdOn: Date.now(),
+        creatorId: currentUser.uid,
+        creatorName: userData.displayName,
+      };
+      console.log(newAd);
+      console.log(errors);
+      if (Object.keys(errors).length === 0) {
+        await firebase.db.collection("ads").add(newAd);
+        history.push("/");
+      }
+    } catch (e) {}
   }
 
   return (
@@ -122,9 +129,14 @@ const CreateAdPage = (props) => {
         <h5>Информация</h5>
         <hr />
         <Form.Row>
-          <Form.Group as={Col} sm={3} controlId="brand">
+          <Form.Group as={Col} sm={4} controlId="brand">
             <Form.Label>Марка</Form.Label>
-            <Form.Control as="select" name="brand" onChange={handleBrandChange}>
+            <Form.Control
+              as="select"
+              name="brand"
+              onChange={handleBrandChange}
+              onBlur={handleBlur}
+            >
               <option key="" value={JSON.stringify({ models: [] })}>
                 Избери Марка
               </option>
@@ -134,10 +146,18 @@ const CreateAdPage = (props) => {
                 </option>
               ))}
             </Form.Control>
+            {errors["brand"] && (
+              <p className={styles.error}>{errors["brand"]}</p>
+            )}
           </Form.Group>
-          <Form.Group as={Col} sm={3} controlId="model">
+          <Form.Group as={Col} sm={4} controlId="model">
             <Form.Label>Модел</Form.Label>
-            <Form.Control as="select" name="model" onChange={handleChange}>
+            <Form.Control
+              as="select"
+              name="model"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            >
               <option key="" value="">
                 Избери Модел
               </option>
@@ -147,20 +167,29 @@ const CreateAdPage = (props) => {
                 </option>
               ))}
             </Form.Control>
+            {errors["model"] && (
+              <p className={styles.error}>{errors["model"]}</p>
+            )}
           </Form.Group>
-          <Form.Group as={Col} sm={3} controlId="modification">
+          <Form.Group as={Col} sm={4} controlId="modification">
             <Form.Label>Разновидност</Form.Label>
             <Form.Control
               name="modification"
+              onBlur={handleBlur}
               onChange={handleChange}
               placeholder="Разновидност"
-            />
+            ></Form.Control>
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} sm={3} controlId="category">
             <Form.Label>Категория</Form.Label>
-            <Form.Control as="select" name="category" onChange={handleChange}>
+            <Form.Control
+              as="select"
+              name="category"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            >
               <option key="select category">Избери категория</option>
               <option key="Estate" value="Estate">
                 Комби
@@ -174,10 +203,13 @@ const CreateAdPage = (props) => {
               <option key="Van" value="Van">
                 Ван
               </option>
-              <option key="Van" value="Sedan">
+              <option key="Sedan" value="Sedan">
                 Седан
               </option>
             </Form.Control>
+            {errors["category"] && (
+              <p className={styles.error}>{errors["category"]}</p>
+            )}
           </Form.Group>
 
           <Form.Group as={Col} sm={3} controlId="first-registration">
@@ -185,6 +217,7 @@ const CreateAdPage = (props) => {
             <Form.Control
               as="select"
               name="firstRegistration"
+              onBlur={handleBlur}
               type="number"
               onChange={handleChange}
             >
@@ -193,27 +226,42 @@ const CreateAdPage = (props) => {
                 <option key={i}>{y}</option>
               ))}
             </Form.Control>
+            {errors["firstRegistration"] && (
+              <p className={styles.error}>{errors["firstRegistration"]}</p>
+            )}
           </Form.Group>
           <Form.Group as={Col} sm={3} controlId="milage">
             <Form.Label>Пробег</Form.Label>
             <Form.Control
               name="milage"
               type="number"
+              onBlur={handleBlur}
               onChange={handleChange}
               placeholder="Пробег км."
             />
+            {errors["milage"] && (
+              <p className={styles.error}>{errors["milage"]}</p>
+            )}
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} sm={2} controlId="engine">
             <Form.Label>Гориво</Form.Label>
-            <Form.Control as="select" name="engine" onChange={handleChange}>
+            <Form.Control
+              as="select"
+              name="engine"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            >
               <option value="">Избери гориво</option>
               <option value="Petrol">Бензин</option>
               <option value="Diesel">Дизел</option>
               <option value="LPG">Газ</option>
               <option value="SNG">Метан</option>
             </Form.Control>
+            {errors["engine"] && (
+              <p className={styles.error}>{errors["engine"]}</p>
+            )}
           </Form.Group>
 
           <Form.Group as={Col} sm={2} controlId="transmission">
@@ -221,12 +269,22 @@ const CreateAdPage = (props) => {
             <Form.Control
               as="select"
               name="transmission"
+              onBlur={handleBlur}
               onChange={handleChange}
             >
-              <option>Избери скорости</option>
-              <option>Ръчни</option>
-              <option>Автоматични</option>
+              <option key="" value="Select Transmission">
+                Избери скорости
+              </option>
+              <option key="manual" value="manual">
+                Ръчни
+              </option>
+              <option key="automatic" value="automatic">
+                Автоматични
+              </option>
             </Form.Control>
+            {errors["transmission"] && (
+              <p className={styles.error}>{errors["transmission"]}</p>
+            )}
           </Form.Group>
           <Form.Group as={Col} sm={2} controlId="power">
             <Form.Label>Мощност</Form.Label>
@@ -234,8 +292,12 @@ const CreateAdPage = (props) => {
               name="power"
               type="number"
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Мощност конски сили"
             />
+            {errors["power"] && (
+              <p className={styles.error}>{errors["power"]}</p>
+            )}
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -245,8 +307,12 @@ const CreateAdPage = (props) => {
               name="price"
               type="number"
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Цена в лв."
             />
+            {errors["price"] && (
+              <p className={styles.error}>{errors["price"]}</p>
+            )}
           </Form.Group>
         </Form.Row>
         <Form.Row>
@@ -312,19 +378,30 @@ const CreateAdPage = (props) => {
             <Form.Control
               name="phone"
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Телефон за връзка..."
             />
+            {errors["phone"] && (
+              <p className={styles.error}>{errors["phone"]}</p>
+            )}
           </Form.Group>
           <Form.Group as={Col} sm={3} controlId="city">
-            <Form.Label>Град</Form.Label>
+            <Form.Label>Град</Form.Label>{" "}
             <Form.Control
               name="city"
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Град.."
             />
+            {errors["city"] && <p className={styles.error}>{errors["city"]}</p>}
           </Form.Group>
         </Form.Row>
-        <Button type="submit">Добави</Button>
+        <hr />
+        <div className={styles["button-container"]}>
+          <Button type="submit" className={styles.button}>
+            Добави
+          </Button>
+        </div>
       </Form>
     </>
   );

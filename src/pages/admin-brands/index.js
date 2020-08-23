@@ -9,6 +9,8 @@ import AdminLayout from "../../components/admin-layout";
 import FormValidation from "../../utils/from-validation";
 import validateBrand from "./validateBrand";
 
+import styles from "./index.module.css";
+
 const INITIAL_STATE = {
   name: "",
 };
@@ -50,9 +52,13 @@ const BrandsAdmin = () => {
           onChange={handleChange}
           errors={errors}
         />
-        <Button type="submit">Add</Button>
+        <div className={styles["button-container"]}>
+          <Button type="submit" className={styles.button}>
+            Добави
+          </Button>
+        </div>
       </Form>
-      <AdminList items={brands} collection="brands" />
+      <AdminList items={brands} collection="brands" path="/admin/brands" />
     </AdminLayout>
   );
 };

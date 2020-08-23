@@ -14,13 +14,11 @@ const INITIAL_STATE = {
 
 const LoginPage = (props) => {
   const { firebase } = useContext(FirebaseContext);
-  const {
-    handleSubmit,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-  } = FormValidation(INITIAL_STATE, validateLogin, handleLogin);
+  const { handleSubmit, handleChange, values, errors } = FormValidation(
+    INITIAL_STATE,
+    validateLogin,
+    handleLogin
+  );
 
   const [firebaseError, setFirebaseError] = useState(null);
 
@@ -28,10 +26,11 @@ const LoginPage = (props) => {
     const { email, password } = values;
     try {
       firebase.login(email, password);
-      props.history.push("/");
     } catch (err) {
-      console.error("Authentication Error", err);
       setFirebaseError(err.message);
+    }
+    if (Object.keys(errors).length === 0) {
+      props.history.push("/");
     }
   }
 
@@ -43,7 +42,6 @@ const LoginPage = (props) => {
             <Input
               label="Email Address"
               onChange={handleChange}
-              onBlur={handleBlur}
               name="email"
               type="email"
               placeHolder="Enter Email"
@@ -53,7 +51,6 @@ const LoginPage = (props) => {
             <Input
               label="Password"
               onChange={handleChange}
-              onBlur={handleBlur}
               name="password"
               type="password"
               placeHolder="Enter Password"

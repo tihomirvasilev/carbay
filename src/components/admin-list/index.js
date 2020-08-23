@@ -1,10 +1,10 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import DeleteButton from "../../components/delete-button";
-
+import styles from "./index.module.css";
 const AdminList = ({ items, collection }) => {
   return (
-    <Table striped bordered hover>
+    <Table className={styles.table} striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
@@ -21,7 +21,7 @@ const AdminList = ({ items, collection }) => {
               <DeleteButton
                 id={item.id}
                 collection={collection}
-                to={"/admin/" + collection}
+                path={"/admin/" + collection}
               />
             </td>
           </tr>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
+import styles from "./index.module.css";
 
 const Input = ({
   as,
@@ -16,6 +17,7 @@ const Input = ({
   return (
     <Form.Group>
       {label && <Form.Label>{label}</Form.Label>}
+      {errors[name] && <p className={styles.error}>* {errors[name]}</p>}
       <Form.Control
         as={as}
         onChange={onChange}
@@ -27,7 +29,6 @@ const Input = ({
       >
         {children}
       </Form.Control>
-      {errors[name] && <p>{errors[name]}</p>}
     </Form.Group>
   );
 };
