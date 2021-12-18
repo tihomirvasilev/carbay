@@ -1,40 +1,57 @@
 # CarBay
-#### SofUni React.js course project
 
-## Can be seen on firebase hosting
-https://carbay-b65be.web.app
-   account: admin@admin.com / asdasd
-
+  "Carbay" is a sample online platform for selling used cars.
+  
 ## Created with:
- #### front-end:
  - React.js
  - React Bootstrap
  - React Icons
- #### back-end
  - Firebase
- 
-## Project Description
-  Carbay is a sample platform for selling used cars.
   
 ## Public Part (Any user: Authenticated or Anonymous)
- The public part is visible by any user without authentication:
  - Login page
  - Register page
  - Home page
  - Ad details page
+ - Search page
 
-## Private Part (Logged in users only)
- - New Ad page - can create a new ad
- - My Ads page - can view his ads
- - Edit Ad page - can edit his ads
- - Can add ads to favorites
- 
+## User Part (Authenticated users only)
+ - Create Ad page
+ - Edit Ad page
+ - Favorites page
+ - My Ads page
 
-## Admin Part (Admin users only)
- - New Brand - can create a new Brand
- - New Model - can create a new Model
- - New Options - can create new Option
- - Delete Ads - can delete any ads
+## Admin Part (Admin user only)
+ - Create brand page
+ - Create model page
+ - Create option page
+
+ ## An authenticated user can:
+  ### Create his:
+       Ad
+       Favorite
+  ### Edit his:
+       Ad
+  ### Delete his:
+       Ad
+       Favorites
+       
+ ## An admin user can:
+  ### Create any:
+      Ad
+      Brand
+      Model
+      Option
+  ### Edit any:
+      Ad
+      Brand
+      Model
+      Option
+  ### Delete any:
+      Ad
+      Brand
+      Model
+      Option
 
 ## How to run this project
  - create .env file inside your src folder, then edit the file using your Firebase application credentials in this format:
