@@ -16,25 +16,25 @@
  - Search page
 
 ## User Part (Authenticated users only)
- - Create Ad page
- - Edit Ad page
+ - Create an Ad page
+ - Edit the Ad page
  - Favorites page
  - My Ads page
 
 ## Admin Part (Admin user only)
- - Create brand page
- - Create model page
- - Create option page
+ - Create a brand page
+ - Create a model page
+ - Create an option page
 
  ## An authenticated user can:
   ### Create his:
        Ad
-       Favorite
+       Favourite
   ### Edit his:
        Ad
   ### Delete his:
        Ad
-       Favorites
+       Favourites
        
  ## An admin user can:
   ### Create any:
